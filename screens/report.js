@@ -114,7 +114,7 @@ export default class SignupScreen extends React.Component {
 
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={() => this.props.navigation.navigate('Home')}
+                        onPress={() => this.props.navigation.navigate('login')}
                     >
                         <Text style={{ textAlign: 'center', color: '#FB9246', bottom: 5, fontSize: 16 }}>Already have an account? Log in.</Text>
                     </TouchableOpacity>

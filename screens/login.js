@@ -32,12 +32,15 @@ export default class LoginScreen extends React.Component {
         return (
 
             <View style={styles.container}>
+                <Image style={styles.image}
+                 source={require('./drawnav/1.png')} />
+
                 <Animatable.View
                     ref={this.validateInput}
                 >
-                    <Icon name="envelope-o" size={20} color="#ccc" style={{ position: 'absolute', top: 25, left: 20 }} />
+                    <Icon name="envelope-o" size={20} color="#ccc" style={{ position: 'absolute', top: 25, left: 20, color: '#FB9246' }} />
                     <TextInput
-                        placeholder="     Email"
+                        placeholder="Email"
                         style={styles.fields}
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' })
@@ -45,9 +48,9 @@ export default class LoginScreen extends React.Component {
                         }
                         }
                     />
-                    <Icon name="lock" size={20} color="#ccc" style={{ position: 'absolute', top: 102, left: 20 }} />
+                    <Icon name="lock" size={20} color="#ccc" style={{ position: 'absolute', top: 102, left: 20, color: '#FB9246' }} />
                     <TextInput
-                        placeholder="     Password"
+                        placeholder="Password"
                         style={styles.fields}
                         secureTextEntry
                         onChangeText={(text) => {
@@ -61,10 +64,10 @@ export default class LoginScreen extends React.Component {
 
                 </Animatable.View>
 
-                <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 80 }}>
+                <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 60 }}>
                     <TouchableOpacity
                         onPress={() => this.onLogin()}
-                        style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 10, borderWidth: 1, borderColor: '#000000' }}
+                        style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 20, borderWidth: 1, borderColor: '#000000' }}
                     >
                         <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>Login</Text>
                     </TouchableOpacity>
@@ -87,13 +90,27 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         color: 'white',
+        bottom: 40,
     },
     fields: {
         height: 50,
         width: 300,
-        borderColor: '#747474',
-        borderWidth: 4,
-        padding: 13,
         margin: 12,
-    }
-});
+        paddingHorizontal: 40,
+        borderBottomRightRadius: 30,
+        borderBottomLeftRadius: 30,
+        borderTopRightRadius: 30,
+        borderTopLeftRadius: 30,
+        backgroundColor: '#d3d3d3d3',
+
+    },
+    image: {
+    right: 10,
+    left: 3,
+    height: 270,
+    width: 370,
+    top: 60,
+},
+
+}    
+);

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -39,11 +39,12 @@ export default class SignupScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+                <Image style={styles.image}
+                    source={require('./drawnav/1.png')} />
 
                 <Animatable.View
                     ref={this.validateInput}
                 >
-                    
                     <Icon name="envelope-o" size={20} color="#ccc" style={{ position: 'absolute', top: 45, left: 20 }} />
                     <TextInput
                         style={styles.fields}
@@ -53,7 +54,26 @@ export default class SignupScreen extends React.Component {
                         }
                         }
                     />
-                
+                    <Icon name="envelope-o" size={20} color="#ccc" style={{ position: 'absolute', top: 45, left: 20 }} />
+                    <TextInput
+                        style={styles.fields}
+                        onChangeText={(text) => {
+                            this.setState({ errMsg: '' }),
+                                this.setState({ username: text })
+                        }
+                        }
+                    />
+
+                    <Icon name="envelope-o" size={20} color="#ccc" style={{ position: 'absolute', top: 45, left: 20 }} />
+                    <TextInput
+                        style={styles.fields}
+                        onChangeText={(text) => {
+                            this.setState({ errMsg: '' }),
+                                this.setState({ username: text })
+                        }
+                        }
+                    />
+
                     <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 135, left: 20 }} />
                     <TextInput
                         style={styles.fields}
@@ -64,7 +84,7 @@ export default class SignupScreen extends React.Component {
                         }
                         }
                     />
-                
+
                     <Icon name="question" size={20} color="#ccc" style={{ position: 'absolute', top: 225, left: 20 }} />
                     <TextInput
                         style={styles.fields}
@@ -75,7 +95,7 @@ export default class SignupScreen extends React.Component {
                         }
                         }
                     />
-                    
+
                     <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 318, left: 20 }} />
                     <TextInput
                         style={styles.fields}
@@ -86,11 +106,11 @@ export default class SignupScreen extends React.Component {
                         }
                         }
                     />
-                    
-                    <Icon name="birthday-cake" size={20} color="#ccc" style={{ position: 'absolute', top: 405, left: 20 }} />
+
+                    <Icon name="birthday-cake" size={20} color="#ccc" style={{ position: 'absolute', top: 300, left: 20 }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="         dd/mm/yyyy"
+                        placeholder="dd/mm/yyyy"
                         secureTextEntry={true}
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),
@@ -103,22 +123,19 @@ export default class SignupScreen extends React.Component {
                 </Animatable.View>
 
 
-
-                <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 100 }}>
+                <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 60, bottom: 70 }}>
                     <TouchableOpacity
-                        onPress={() => this.props.navigation.navigate('Register')}
-                        style={{ width: 200, backgroundColor: '#FB9246', padding: 10, bottom: 12, alignItems: 'center', justifyContent: 'center', borderRadius: 15, borderWidth: 1, borderColor: '#000000' }}
+                        onPress={() => this.onLogin()}
+                        style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 20, borderWidth: 1, borderColor: '#000000' }}
                     >
-                        <Text style={{ textAlign: 'center', color: '#ffffff', fontSize: 16 }}>Register</Text>
-
-
+                        <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>Continue</Text>
                     </TouchableOpacity>
+
                     <TouchableOpacity
                         onPress={() => this.props.navigation.navigate('Home')}
                     >
-                        <Text style={{ textAlign: 'center', color: '#FB9246', bottom: 5, fontSize: 16 }}>Already have an account? Log in.</Text>
+                        <Text style={{ textAlign: 'center', color: '#FB9246', fontSize: 16 }}>Already have an account? Log in..</Text>
                     </TouchableOpacity>
-
                 </View>
 
             </View>
@@ -131,14 +148,26 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        top: 50,
     },
     fields: {
         height: 45,
         width: 300,
-        borderColor: '#747474',
-        borderWidth: 1,
-        padding: 13,
-        margin: 13,
+        margin: 6,
+        paddingHorizontal: 40,
+        borderBottomRightRadius: 30,
+        borderBottomLeftRadius: 30,
+        borderTopRightRadius: 30,
+        borderTopLeftRadius: 30,
+        backgroundColor: '#d3d3d3d3',
+        bottom: 55,
+    },
+    image: {
+    right: 10,
+    left: 3,
+    height: 250,
+    width: 370,
+    top: 10,
     },
 
 });

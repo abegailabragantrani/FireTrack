@@ -45,28 +45,20 @@ export default class SignupScreen extends React.Component {
                 <Animatable.View
                     ref={this.validateInput}
                 >
-                    <Icon name="envelope-o" size={20} color="#ccc" style={{ position: 'absolute', top: 45, left: 20 }} />
+                    <Icon name="envelope-o" size={20} color="#ccc" style={{ position: 'absolute', top: 45, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
+                        placeholder="Username"
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),
                                 this.setState({ username: text })
                         }
                         }
                     />
-                    <Icon name="envelope-o" size={20} color="#ccc" style={{ position: 'absolute', top: 45, left: 20 }} />
+                    <Icon name="envelope-o" size={20} color="#ccc" style={{ position: 'absolute', top: 45, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
-                        onChangeText={(text) => {
-                            this.setState({ errMsg: '' }),
-                                this.setState({ username: text })
-                        }
-                        }
-                    />
-
-                    <Icon name="envelope-o" size={20} color="#ccc" style={{ position: 'absolute', top: 45, left: 20 }} />
-                    <TextInput
-                        style={styles.fields}
+                        placeholder="Name"
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),
                                 this.setState({ username: text })
@@ -74,9 +66,21 @@ export default class SignupScreen extends React.Component {
                         }
                     />
 
-                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 135, left: 20 }} />
+                    <Icon name="envelope-o" size={20} color="#ccc" style={{ position: 'absolute', top: 45, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
+                        placeholder="Gender"
+                        onChangeText={(text) => {
+                            this.setState({ errMsg: '' }),
+                                this.setState({ username: text })
+                        }
+                        }
+                    />
+
+                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 135, left: 20, color: '#FB9246' }} />
+                    <TextInput
+                        style={styles.fields}
+                        placeholder="Password"
                         secureTextEntry={true}
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),
@@ -85,9 +89,10 @@ export default class SignupScreen extends React.Component {
                         }
                     />
 
-                    <Icon name="question" size={20} color="#ccc" style={{ position: 'absolute', top: 225, left: 20 }} />
+                    <Icon name="question" size={20} color="#ccc" style={{ position: 'absolute', top: 225, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
+                        placeholder="Address"
                         secureTextEntry={true}
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),
@@ -96,9 +101,10 @@ export default class SignupScreen extends React.Component {
                         }
                     />
 
-                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 318, left: 20 }} />
+                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 318, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
+                        placeholder="Email"
                         secureTextEntry={true}
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),
@@ -107,10 +113,10 @@ export default class SignupScreen extends React.Component {
                         }
                     />
 
-                    <Icon name="birthday-cake" size={20} color="#ccc" style={{ position: 'absolute', top: 300, left: 20 }} />
+                    <Icon name="birthday-cake" size={20} color="#ccc" style={{ position: 'absolute', top: 300, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="dd/mm/yyyy"
+                        placeholder="Phone Number"
                         secureTextEntry={true}
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import * as Animatable from 'react-native-animatable';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 
 export default class LoginScreen extends React.Component {
@@ -38,7 +38,7 @@ export default class LoginScreen extends React.Component {
                 <Animatable.View
                     ref={this.validateInput}
                 >
-                    <Icon name="envelope-o" size={20} color="#ccc" style={{ position: 'absolute', top: 25, left: 20, color: '#FB9246' }} />
+                    <Icon name="envelope" size={20} style={{ position: 'absolute', top: 25, left: 20, color: '#FB9246' }} />
                     <TextInput
                         placeholder="Email"
                         style={styles.fields}
@@ -48,7 +48,7 @@ export default class LoginScreen extends React.Component {
                         }
                         }
                     />
-                    <Icon name="lock" size={20} color="#ccc" style={{ position: 'absolute', top: 102, left: 20, color: '#FB9246' }} />
+                    <Icon name="lock" size={20} style={{ position: 'absolute', top: 102, left: 20, color: '#FB9246' }} />
                     <TextInput
                         placeholder="Password"
                         style={styles.fields}

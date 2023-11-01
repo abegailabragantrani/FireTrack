@@ -2,7 +2,7 @@ import * as React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import * as Animatable from 'react-native-animatable';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 
 export default class SignupScreen extends React.Component {
@@ -45,7 +45,7 @@ export default class SignupScreen extends React.Component {
                 <Animatable.View
                     ref={this.validateInput}
                 >
-                    <Icon name="envelope-o" size={20} color="#ccc" style={{ position: 'absolute', top: 45, left: 20, color: '#FB9246' }} />
+                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', bottom: 444, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Username"
@@ -55,10 +55,10 @@ export default class SignupScreen extends React.Component {
                         }
                         }
                     />
-                    <Icon name="envelope-o" size={20} color="#ccc" style={{ position: 'absolute', top: 45, left: 20, color: '#FB9246' }} />
+                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 18, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="Name"
+                        placeholder="Fullname"
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),
                                 this.setState({ username: text })
@@ -66,7 +66,7 @@ export default class SignupScreen extends React.Component {
                         }
                     />
 
-                    <Icon name="envelope-o" size={20} color="#ccc" style={{ position: 'absolute', top: 45, left: 20, color: '#FB9246' }} />
+                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 75, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Gender"
@@ -77,7 +77,7 @@ export default class SignupScreen extends React.Component {
                         }
                     />
 
-                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 135, left: 20, color: '#FB9246' }} />
+                    <Icon name="lock" size={20} color="#ccc" style={{ position: 'absolute', top: 133, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Password"
@@ -89,7 +89,7 @@ export default class SignupScreen extends React.Component {
                         }
                     />
 
-                    <Icon name="question" size={20} color="#ccc" style={{ position: 'absolute', top: 225, left: 20, color: '#FB9246' }} />
+                    <Icon name="location-pin" size={20} color="#ccc" style={{ position: 'absolute', top: 190, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Address"
@@ -101,7 +101,7 @@ export default class SignupScreen extends React.Component {
                         }
                     />
 
-                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 318, left: 20, color: '#FB9246' }} />
+                    <Icon name="envelope" size={20} color="#ccc" style={{ position: 'absolute', top: 248, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Email"
@@ -113,7 +113,7 @@ export default class SignupScreen extends React.Component {
                         }
                     />
 
-                    <Icon name="birthday-cake" size={20} color="#ccc" style={{ position: 'absolute', top: 300, left: 20, color: '#FB9246' }} />
+                    <Icon name="phone" size={20} color="#ccc" style={{ position: 'absolute', top: 303, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Phone Number"
@@ -129,10 +129,10 @@ export default class SignupScreen extends React.Component {
                 </Animatable.View>
 
 
-                <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 60, bottom: 70 }}>
+                <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 75, bottom: 70 }}>
                     <TouchableOpacity
                         onPress={() => this.onLogin()}
-                        style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 20, borderWidth: 1, borderColor: '#000000' }}
+                        style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 1, borderWidth: 1, borderColor: '#000000' }}
                     >
                         <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>Continue</Text>
                     </TouchableOpacity>

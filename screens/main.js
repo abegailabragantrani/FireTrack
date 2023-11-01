@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
 import "react-native-gesture-handler";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Account from "./drawnav/Account";
@@ -16,8 +15,8 @@ const Drawer = createDrawerNavigator();
 export default class MainScreen extends React.Component {
   render() {
     return (
-      
-      <Drawer.Navigator drawerContent={props =>  <DrawerNav{...props} />}
+
+      <Drawer.Navigator drawerContent={props => <DrawerNav{...props} />}
         screenOptions={{
           headerShown: false,
           drawerActiveBackgroundColor: '#FB9246',
@@ -57,7 +56,7 @@ export default class MainScreen extends React.Component {
               <Icon name="logout" size={22} color={color} />
             ),
           }} />
-          
+
       </Drawer.Navigator>
 
 

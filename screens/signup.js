@@ -3,16 +3,9 @@ import { View, Text, StyleSheet, Image } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
-import Dropdown from 'react-native-element-dropdown';
 
 
-const data = [
-    {label: 'Item 1', value: '1'},
-    {label: 'Item 2', value: '2'},
-    {label: 'Item 3', value: '3'},
-  ];
 export default class SignupScreen extends React.Component {
-
 
     constructor(props) {
         super(props)
@@ -74,28 +67,15 @@ export default class SignupScreen extends React.Component {
                     />
 
                     <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 75, left: 20, color: '#FB9246' }} />
-                    <View>
-                        <TextInput
-                            style={styles.fields}
-                            placeholder="Gender"
-                            onChangeText={(text) => {
-                                this.setState({ errMsg: '' }),
-                                    this.setState({ username: text })
-                            }
-                            }
-                        />
-                        <Dropdown
-                            style={{ flex: 1 }}
-                            data={data}
-                            search
-                            searchPlaceholder="Search"
-                            labelField="label"
-                            valueField="value"
-                            placeholder="Select item"
-                            onChange={(item) => { console.log(item) }}
-                        />
-
-                    </View>
+                    <TextInput
+                        style={styles.fields}
+                        placeholder="Gender"
+                        onChangeText={(text) => {
+                            this.setState({ errMsg: '' }),
+                                this.setState({ username: text })
+                        }
+                        }
+                    />
 
                     <Icon name="lock" size={20} color="#ccc" style={{ position: 'absolute', top: 133, left: 20, color: '#FB9246' }} />
                     <TextInput
@@ -160,7 +140,7 @@ export default class SignupScreen extends React.Component {
                     <TouchableOpacity
                         onPress={() => this.props.navigation.navigate('Home')}
                     >
-                        <Text style={{ textAlign: 'center', color: '#FB9246', fontSize: 16, padding: 18 }}>Already have an account? Log in..</Text>
+                        <Text style={{ textAlign: 'center', color: '#FB9246', fontSize: 16 }}>Already have an account? Log in..</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -189,11 +169,11 @@ const styles = StyleSheet.create({
         bottom: 55,
     },
     image: {
-        right: 10,
-        left: 3,
-        height: 250,
-        width: 370,
-        top: 10,
+    right: 10,
+    left: 3,
+    height: 250,
+    width: 370,
+    top: 10,
     },
 
 });

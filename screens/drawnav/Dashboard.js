@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet,Image } from 'react-native'
 
 export default class DashboardScreen extends React.Component {
   render() {
@@ -21,7 +21,8 @@ export default class DashboardScreen extends React.Component {
         >
           <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>View Incident Status</Text>
         </TouchableOpacity>
-
+        
+        
       </View>
     )
   }

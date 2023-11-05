@@ -48,7 +48,7 @@ export default class ReportScreen extends React.Component {
                     <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', bottom: 444, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="Username"
+                        placeholder="Complete Address"
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),
                                 this.setState({ username: text })
@@ -58,7 +58,7 @@ export default class ReportScreen extends React.Component {
                     <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 18, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="Fullname"
+                        placeholder="Purok/Sitio"
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),
                                 this.setState({ username: text })
@@ -69,7 +69,7 @@ export default class ReportScreen extends React.Component {
                     <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 75, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="Gender"
+                        placeholder="Barangay"
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),
                                 this.setState({ username: text })
@@ -80,7 +80,7 @@ export default class ReportScreen extends React.Component {
                     <Icon name="lock" size={20} color="#ccc" style={{ position: 'absolute', top: 133, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="Password"
+                        placeholder="Municipality"
                         secureTextEntry={true}
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),
@@ -92,7 +92,7 @@ export default class ReportScreen extends React.Component {
                     <Icon name="location-pin" size={20} color="#ccc" style={{ position: 'absolute', top: 190, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="Address"
+                        placeholder="Province"
                         secureTextEntry={true}
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),
@@ -104,7 +104,7 @@ export default class ReportScreen extends React.Component {
                     <Icon name="envelope" size={20} color="#ccc" style={{ position: 'absolute', top: 248, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="Email"
+                        placeholder="Zipcode"
                         secureTextEntry={true}
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),
@@ -116,7 +116,7 @@ export default class ReportScreen extends React.Component {
                     <Icon name="phone" size={20} color="#ccc" style={{ position: 'absolute', top: 303, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="Phone Number"
+                        placeholder="Time"
                         secureTextEntry={true}
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),

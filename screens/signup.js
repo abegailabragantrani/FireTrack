@@ -45,7 +45,7 @@ export default class SignupScreen extends React.Component {
                 <Animatable.View
                     ref={this.validateInput}
                 >
-                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', bottom: 444, left: 20, color: '#FB9246' }} />
+                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', bottom: 415, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Username"
@@ -124,17 +124,18 @@ export default class SignupScreen extends React.Component {
                         }
                         }
                     />
-                    <Text style={{ color: 'red', textAlign: 'center', marginTop: 10 }}>{this.state.errMsg}</Text>
+                    
 
                 </Animatable.View>
 
 
-                <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 75, bottom: 70 }}>
+                <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 75, bottom: 40 }}>
                     <TouchableOpacity
-                        onPress={() => this.onLogin()}
+                        onPress={() => this.props.navigation.navigate('Verification')}
                         style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 1, borderWidth: 1, borderColor: '#000000' }}
                     >
                         <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>Continue</Text>
+                        
                     </TouchableOpacity>
 
                     <TouchableOpacity

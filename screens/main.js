@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Button } from 'react-native';
 import "react-native-gesture-handler";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Account from "./drawnav/Account";
@@ -7,7 +8,6 @@ import Logout from './drawnav/Logout';
 import Dashboard from './drawnav/Dashboard';
 import DrawerNav from '../componets/DrawerNav';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
-
 
 const Drawer = createDrawerNavigator();
 
@@ -50,13 +50,14 @@ export default class MainScreen extends React.Component {
             ),
           }} />
 
-        <Drawer.Screen name="Logout" component={Logout}
+        <Drawer.Screen name="Logout" component={Logout} 
           options={{
             drawerIcon: ({ color }) => (
               <Icon name="logout" size={22} color={color} />
             ),
-          }} />
-
+          }} 
+          
+          />
       </Drawer.Navigator>
 
 

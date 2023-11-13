@@ -6,7 +6,7 @@ export default class IncidentScreen extends React.Component {
 render() {
       return (
         <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
-          <Text>Logout</Text>
+          <Text>INCIDENT WHOO</Text>
         </View>
       )
     }

@@ -9,6 +9,7 @@ import ReportScreen from './screens/report';
 import IncidentScreen from './screens/incidents';
 import DashboardScreen from './screens/drawnav/Dashboard';
 import VerificationScreen from './screens/Verification';
+import ForgotPassScreen from './screens/forgotpass';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,7 @@ export default class App extends React.Component {
             <Stack.Screen name="Home" component={LoginScreen} />
             <Stack.Screen name="Signup" component={SignupScreen} />
             <Stack.Screen name="Main" component={MainScreen} />
+            <Stack.Screen name="ForgotPass" component={ForgotPassScreen} />
             <Stack.Screen name="Verification" component={VerificationScreen} />
             <Stack.Screen name="Dashboard" component={DashboardScreen} />
             <Stack.Screen name="Report" component={ReportScreen} />

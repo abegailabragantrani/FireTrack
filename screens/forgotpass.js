@@ -5,7 +5,7 @@ import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 
-export default class LoginScreen extends React.Component {
+export default class ForgotPassScreen extends React.Component {
 
     constructor(props) {
         super(props)
@@ -38,7 +38,7 @@ export default class LoginScreen extends React.Component {
                 <Animatable.View
                     ref={this.validateInput}
                 >
-                    <Icon name="envelope" size={20} style={{ position: 'absolute', top:61, left: 20, color: '#FB9246' }} />
+                    <Icon name="envelope" size={20} style={{ position: 'absolute', top: 25, left: 20, color: '#FB9246' }} />
                     <TextInput
                         placeholder="Email"
                         style={styles.fields}
@@ -48,7 +48,7 @@ export default class LoginScreen extends React.Component {
                         }
                         }
                     />
-                    <Icon name="lock" size={20} style={{ position: 'absolute', top: 139, left: 20, color: '#FB9246' }} />
+                    <Icon name="lock" size={20} style={{ position: 'absolute', top: 102, left: 20, color: '#FB9246' }} />
                     <TextInput
                         placeholder="Password"
                         style={styles.fields}
@@ -60,18 +60,18 @@ export default class LoginScreen extends React.Component {
                         }
 
                     />
-                    <Text style={{ color: 'red', textAlign: 'center', top: 130 }}>{this.state.errMsg}</Text>
+                    <Text style={{ color: 'red', textAlign: 'center', marginTop: 10 }}>{this.state.errMsg}</Text>
                     <TouchableOpacity
-                        onPress={() => this.props.navigation.navigate('ForgotPass')}
+                        onPress={() => this.props.navigation.navigate('Signup')}
                     >
-                        <Text style={{ textAlign: 'center', color: '#FB9246', fontSize: 16, left: 80, bottom: 1 }}>Forgot Password?</Text>
+                        <Text style={{ textAlign: 'center', color: '#FB9246', fontSize: 16 }}>Forgot Password?</Text>
                     </TouchableOpacity>
                 </Animatable.View>
 
-                <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 5, top: 30 }}>
+                <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 60 }}>
                     <TouchableOpacity
                         onPress={() => this.onLogin()}
-                        style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 15, borderWidth: 1, borderColor: '#000000' }}
+                        style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 20, borderWidth: 1, borderColor: '#000000' }}
                     >
                         <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>Login</Text>
                     </TouchableOpacity>
@@ -94,13 +94,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         color: 'white',
-        bottom: 80,
+        bottom: 40,
     },
     fields: {
         height: 50,
         width: 300,
-        top: 31,
-        margin: 15,
+        margin: 12,
         paddingHorizontal: 40,
         borderBottomRightRadius: 30,
         borderBottomLeftRadius: 30,
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
     left: 3,
     height: 270,
     width: 370,
-    top: 120,
+    top: 60,
 },
 
 }    

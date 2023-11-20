@@ -1,17 +1,55 @@
 import * as React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
+import apiService from '../api/config';
 
 
-export default class LoginScreen extends React.Component {
+const  SubmitCode = ({ route, navigation }) => {
+        
+      const { email } = route.params;
+        const verifyCreds = () => {
+            apiService.post('/')
+        }
+        const [data,setData] = React.useState({
+            a:null,
+            b:null,
+            c:null,
+            d:null,
+            loading:false,
+            error:''
+        })
 
-    render() {
+        const handleValidateCode = async() => {
+            try {
+                setData({...data,loading:true})
+
+                 const payload = {
+                code:data.a+data.b+data.c+data.d,
+                email:email
+                }
+            const response =await apiService.post('/reset-code',payload)
+            if(response){
+                navigation.navigate('ChangePass',{
+                    email: email,
+                    code:payload.code
+                    })
+            }
+            setData({...data,loading:true})
+
+            } catch (error) {
+             setData({...data,loading:false})
+
+                setData({...data,error:error.response.data.message});
+            }
+      
+        }
         return (
 
             <View style={styles.container}>
                 <Image style={styles.image}
                     source={require('./drawnav/1.png')} />
-            <Text>A 4 digit code has been sent to your email</Text>
+            <Text>A 4 digit code has been sent to your email {"\n"}{email} for verification</Text>
+                           <Text style={{ color: 'red', textAlign: 'center', top: 30 }}>{data.error}</Text>
 
                 <TextInput
                     keyboardType={"number-pad"}
@@ -19,6 +57,7 @@ export default class LoginScreen extends React.Component {
                     textAlign="center"
                     maxLength={1}
                     style={styles.otp1}
+                    onChangeText={(text)=>setData({...data,a:text})}
                 />
                 <TextInput
                     keyboardType={"number-pad"}
@@ -26,6 +65,7 @@ export default class LoginScreen extends React.Component {
                     textAlign="center"
                     maxLength={1}
                     style={styles.otp2}
+                    onChangeText={(text)=>setData({...data,b:text})}
                 />
                 <TextInput
                     keyboardType={"number-pad"}
@@ -33,6 +73,7 @@ export default class LoginScreen extends React.Component {
                     textAlign="center"
                     maxLength={1}
                     style={styles.otp3}
+                    onChangeText={(text)=>setData({...data,c:text})}
                 />
                 <TextInput
                     keyboardType={"number-pad"}
@@ -40,24 +81,30 @@ export default class LoginScreen extends React.Component {
                     textAlign="center"
                     maxLength={1}
                     style={styles.otp4}
+                    onChangeText={(text)=>setData({...data,d:text})}
                 />
+
+
 
 
 
                 <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: -230 }}>
                 <TouchableOpacity
-                        onPress={() => this.props.navigation.navigate('Home')}
+                        onPress={ handleValidateCode}
                         style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 1, borderWidth: 1, borderColor: '#000000' }}
+                        disabled={data.loading}
                     >
-                        <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>Enter OTP</Text>
+                        <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>{data.loading?"loading...":"Enter OTP"}</Text>
                         
                     </TouchableOpacity>
                 </View>
 
             </View>
         )
-    }
+    
 }
+
+export default SubmitCode
 
 const styles = StyleSheet.create({
     container: {

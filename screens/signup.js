@@ -3,6 +3,9 @@ import { View, Text, StyleSheet, Image } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import apiService from '../api/config';
+import { ActivityIndicator } from "react-native";
+
 
 
 export default class SignupScreen extends React.Component {
@@ -13,28 +16,62 @@ export default class SignupScreen extends React.Component {
     }
 
     state = {
-        username: "",
-        password: "",
-        errMsg: ""
+
+        fullname:'',
+        gender:'',
+        address:'',
+        phone:'',
+        email:'',
+        password:'',
+        password_confirmation:'',
+        loading:false,
+        error:['']
+
     }
 
-    onLogin = () => {
-        if (this.state.username == 'abe' && this.state.password == 'pretty') {
-            this.props.navigation.navigate('Main')
-        } else {
-            this.validateInput.current.shake(800)
-            this.setState({ errMsg: 'Invalid login details. Try again!' })
+    onLogin = async() => {
+        // if (this.state.username == 'abe' && this.state.password == 'pretty') {
+        //     this.props.navigation.navigate('Main')
+        // } else {
+        //     this.validateInput.current.shake(800)
+        //     this.setState({ errMsg: 'Invalid login details. Try again!' })
+        // }
+
+        try {
+            this.setState({ loading: true })
+             const info = {
+                gender:this.state.gender,
+                address:this.state.address,
+                phone:this.state.phone
+            }
+        const payload = {
+           name:this.state.fullname,
+           email:this.state.email,
+           password:this.state.password,
+           password_confirmation:this.state.password_confirmation,
+           info:info
+         
         }
+        console.log(payload);
+        
+        const response = await apiService.post('/register',payload)
+        if(response){
+            this.props.navigation.navigate('Home')
+        }
+
+        this.setState({ loading: false })
+        } catch (error) {
+            console.log(error);
+            this.setState({ loading: false })
+            if(error.response.data.errors){
+                this.setState({ error: Object.values(error.response.data.errors) })
+            }
+            
+        }
+       
     }
 
-    onLogin = () => {
-        if (this.state.username == 'abe' && this.state.password == 'pretty') {
-            this.props.navigation.navigate('Main')
-        } else {
-            this.validateInput.current.shake(800)
-            this.setState({ errMsg: 'Invalid login details. Try again!' })
-        }
-    }
+   
 
     render() {
         return (
@@ -48,20 +85,18 @@ export default class SignupScreen extends React.Component {
                     <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', bottom: 415, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="Username"
+                        placeholder="fullname"
                         onChangeText={(text) => {
-                            this.setState({ errMsg: '' }),
-                                this.setState({ username: text })
+                            this.setState({ fullname: text })
                         }
                         }
                     />
                     <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 18, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="Fullname"
+                        placeholder="Gender"
                         onChangeText={(text) => {
-                            this.setState({ errMsg: '' }),
-                                this.setState({ username: text })
+                            this.setState({ gender: text })
                         }
                         }
                     />
@@ -69,10 +104,9 @@ export default class SignupScreen extends React.Component {
                     <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 75, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="Gender"
+                        placeholder="address"
                         onChangeText={(text) => {
-                            this.setState({ errMsg: '' }),
-                                this.setState({ username: text })
+                            this.setState({ address: text })
                         }
                         }
                     />
@@ -80,11 +114,9 @@ export default class SignupScreen extends React.Component {
                     <Icon name="lock" size={20} color="#ccc" style={{ position: 'absolute', top: 133, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="Password"
-                        secureTextEntry={true}
+                        placeholder="Phone"
                         onChangeText={(text) => {
-                            this.setState({ errMsg: '' }),
-                                this.setState({ password: text })
+                            this.setState({ phone: text })
                         }
                         }
                     />
@@ -92,11 +124,9 @@ export default class SignupScreen extends React.Component {
                     <Icon name="location-pin" size={20} color="#ccc" style={{ position: 'absolute', top: 190, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="Address"
-                        secureTextEntry={true}
+                        placeholder="Email"
                         onChangeText={(text) => {
-                            this.setState({ errMsg: '' }),
-                                this.setState({ password: text })
+                            this.setState({ email: text })
                         }
                         }
                     />
@@ -104,11 +134,10 @@ export default class SignupScreen extends React.Component {
                     <Icon name="envelope" size={20} color="#ccc" style={{ position: 'absolute', top: 248, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="Email"
+                        placeholder="Password"
                         secureTextEntry={true}
                         onChangeText={(text) => {
-                            this.setState({ errMsg: '' }),
-                                this.setState({ password: text })
+                            this.setState({ password: text })
                         }
                         }
                     />
@@ -116,26 +145,36 @@ export default class SignupScreen extends React.Component {
                     <Icon name="phone" size={20} color="#ccc" style={{ position: 'absolute', top: 303, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="Phone Number"
+                        placeholder="Confirm Password"
                         secureTextEntry={true}
                         onChangeText={(text) => {
-                            this.setState({ errMsg: '' }),
-                                this.setState({ password: text })
+                            this.setState({ password_confirmation: text })
                         }
                         }
                     />
                     
 
                 </Animatable.View>
-
-
+                {this.state.error.map((err)=>
+                { 
+                if(err){
+                    return(
+                         <Text style={{ color: 'red', textAlign: 'center', top: -60 }}>
+                            {err}
+                        </Text>
+                    )  
+                }})}
                 <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 75, bottom: 40 }}>
                     <TouchableOpacity
-                        onPress={() => this.props.navigation.navigate('Verification')}
+                        onPress={() => this.onLogin()}
                         style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 1, borderWidth: 1, borderColor: '#000000' }}
+                        disabled={this.state.loading}
                     >
+                        { this.state.loading?
+                        <ActivityIndicator color={"#fff"}  />
+                        :
                         <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>Continue</Text>
-                        
+                        }
                     </TouchableOpacity>
 
                     <TouchableOpacity

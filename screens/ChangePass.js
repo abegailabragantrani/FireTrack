@@ -9,20 +9,22 @@ import { getToken } from '../lib/TokenHandler';
 
 
 
-export default class LoginScreen extends React.Component {
+export default class ChangePass extends React.Component {
 
     constructor(props) {
         super(props)
         this.validateInput = React.createRef()
     }
     state = {
-        username: "",
         password: "",
-        errMsg: ""
+        password_confirmation: "",
+        error:'',
+        loading:false
+
     }
          
 
-    onLogin = async () => {
+    handleChangePass = async () => {
         // if (this.state.username == 'Abe' && this.state.password == 'pretty') {
         //     this.props.navigation.navigate('Main')
         // } else {
@@ -32,37 +34,27 @@ export default class LoginScreen extends React.Component {
       
 
         try {
+            this.setState({ loading: true })
             const payload = {
-                email:this.state.username,
-                password:this.state.password
+                email:this.props.route.params.email,
+                 code:this.props.route.params.code,
+                password:this.state.password,
+                password_confirmation:this.state.password_confirmation
             }
-            const request = await apiService.post('/login', payload, {
+            console.log(payload);
+            const request = await apiService.post('/reset-submit', payload, {
             'Accept': 'application/json',
             });
-
-            setToken = async (token) =>{
-                 try {
-                    await AsyncStorage.setItem('token', token);
-                } catch (error) {
-                    
-                }
+            if(request){
+               this.props.navigation.navigate('Home')
             }
-            if(request.data.token){
-                setToken(request.data.token);
-            }
-            if(await getToken()){
-                this.setState({ password: '' })
-                this.setState({ username: '' })
-                this.setState({ errMsg: '' })
-                this.props.navigation.navigate('Main')
-                 
-            }
-            return request;
+            this.setState({ loading: false })
         } catch (error) {
+            this.setState({ loading: false })
+            console.log(error);
             if(error.response.status===422){
-                this.setState({ errMsg: 'Your username or password is incorrect' })
+                this.setState({ error: 'Password does not match' })
             }
-            return error;
         }
         
     }
@@ -85,50 +77,40 @@ export default class LoginScreen extends React.Component {
                 >
                     <Icon name="envelope" size={20} style={{ position: 'absolute', top:61, left: 20, color: '#FB9246' }} />
                     <TextInput
-                        placeholder="Email"
+                        placeholder="password"
                         style={styles.fields}
                         onChangeText={(text) => {
-                            this.setState({ errMsg: '' })
-                            this.setState({ username: text })
+                            this.setState({ password: text })
                         }
                         }
-                        value={this.state.username}
                     />
                     <Icon name="lock" size={20} style={{ position: 'absolute', top: 139, left: 20, color: '#FB9246' }} />
                     <TextInput
-                        placeholder="Password"
+                        placeholder="Confirm password"
                         style={styles.fields}
                         secureTextEntry
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),
-                                this.setState({ password: text })
+                                this.setState({ password_confirmation: text })
                         }
                         }
-                        value={this.state.password}
 
                     />
 
-                    <Text style={{ color: 'red', textAlign: 'center', top: 40 }}>{this.state.errMsg}</Text>
-                    <TouchableOpacity
-                        onPress={() => this.props.navigation.navigate('ForgotPass')}
-                    >
-                        <Text style={{ textAlign: 'center', color: '#FB9246', fontSize: 16, left: 80, bottom: 1 }}>Forgot Password?</Text>
-                    </TouchableOpacity>
+                    <Text style={{ color: 'red', textAlign: 'center', top: 19 }}>{this.state.error}</Text>
+                
                 </Animatable.View>
 
                 <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 5, top: 30 }}>
                     <TouchableOpacity
-                        onPress={() => this.onLogin()}
+                        onPress={() => this.handleChangePass()}
+                        disabled={this.state.loading}
                         style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 15, borderWidth: 1, borderColor: '#000000' }}
                     >
-                        <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>Login</Text>
+                        <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>Change password</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity
-                        onPress={() => this.props.navigation.navigate('Signup')}
-                    >
-                        <Text style={{ textAlign: 'center', color: '#FB9246', fontSize: 16 }}>Don't have an account? Sign up.</Text>
-                    </TouchableOpacity>
+                
                 </View>
 
             </View>

@@ -8,17 +8,40 @@ import Logout from './drawnav/Logout';
 import Dashboard from './drawnav/Dashboard';
 import DrawerNav from '../componets/DrawerNav';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
+import { NativeModules } from "react-native";
+import apiService from '../api/config';
+import { removeCreds } from '../lib/TokenHandler';
+
 
 const Drawer = createDrawerNavigator();
 
-
-export default class MainScreen extends React.Component {
-  render() {
+const MainScreen = (props)=> {
+  const handleLogout = async() => {
+    try {
+      const request = await apiService.get('/logout');
+      if(request){
+        props.navigation.navigate('Home')
+        await removeCreds()
+      }
+      
+    } catch (error) {
+      console.log('Error logout',error);
+    }
+    
+  }
     return (
 
-      <Drawer.Navigator drawerContent={props => <DrawerNav{...props} />}
+      <Drawer.Navigator drawerContent={props =><DrawerContentScrollView> 
+        <DrawerNav{...props} /> 
+        <DrawerItem 
+          label="Logout" 
+          onPress={handleLogout} 
+          icon={()=><Icon name="logout" size={22}  />}
+        />
+        </DrawerContentScrollView>
+        }
         screenOptions={{
-          headerShown: false,
           drawerActiveBackgroundColor: '#FB9246',
           drawerActiveTintColor: '#fff',
           drawerInactiveTintColor: '#333',
@@ -26,7 +49,10 @@ export default class MainScreen extends React.Component {
             marginLeft: 25,
             fontSize: 15,
           },
-        }}>
+          
+          headerShown:true
+        }}
+      >
 
         <Drawer.Screen name="Dashboard" component={Dashboard}
           options={{
@@ -50,17 +76,19 @@ export default class MainScreen extends React.Component {
             ),
           }} />
 
-        <Drawer.Screen name="Logout" component={Logout} 
+        {/* <Button name="Logout" component={Logout} 
           options={{
             drawerIcon: ({ color }) => (
               <Icon name="logout" size={22} color={color} />
             ),
           }} 
           
-          />
+          /> */}
       </Drawer.Navigator>
 
 
     );
-  }
+  
 }
+
+export default MainScreen;

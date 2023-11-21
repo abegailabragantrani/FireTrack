@@ -12,6 +12,8 @@ import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { NativeModules } from "react-native";
 import apiService from '../api/config';
 import { removeCreds } from '../lib/TokenHandler';
+import {Alert} from 'react-native';
+
 
 
 const Drawer = createDrawerNavigator();
@@ -30,14 +32,25 @@ const MainScreen = (props)=> {
     }
     
   }
+
+  const alertButton = () =>
+    Alert.alert('Logout', 'Are you sure?', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'Logout', onPress: async() => await handleLogout()},
+    ]);
     return (
 
-      <Drawer.Navigator drawerContent={props =><DrawerContentScrollView> 
-        <DrawerNav{...props} /> 
-        <DrawerItem 
-          label="Logout" 
-          onPress={handleLogout} 
-          icon={()=><Icon name="logout" size={22}  />}
+      <Drawer.Navigator drawerContent={props =>
+      <DrawerContentScrollView>
+        <DrawerNav {...props} />
+        <DrawerItem
+          label="Logout"
+          onPress={alertButton}
+          icon={() => <Icon name="logout" size={22} />} 
         />
         </DrawerContentScrollView>
         }

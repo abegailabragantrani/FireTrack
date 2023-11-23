@@ -32,7 +32,7 @@ export default class SignupScreen extends React.Component {
             this.props.navigation.navigate('Main')
         } else {
             this.validateInput.current.shake(800)
-            this.setState({ errMsg: 'Invalid login details. Try again!' })
+            this.setState({ errMsg: 'Invalid registration details. Try again!' })
         }
     }
 

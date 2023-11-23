@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 
 
-export default class VerificationScreen extends React.Component {
+export default class VeriResetPassScreen extends React.Component {
 
     render() {
         return (
@@ -46,7 +46,7 @@ export default class VerificationScreen extends React.Component {
 
                 <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: -230 }}>
                 <TouchableOpacity
-                        onPress={() => this.props.navigation.navigate('Home')}
+                        onPress={() => this.props.navigation.navigate('ResetPass')}
                         style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 1, borderWidth: 1, borderColor: '#000000' }}
                     >
                         <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>Enter OTP</Text>

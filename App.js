@@ -8,7 +8,6 @@ import MainScreen from './screens/main';
 import ReportScreen from './screens/report';
 import IncidentScreen from './screens/incidents';
 import VerificationScreen from './screens/Verification';
-import DashboardScreen from './screens/drawnav/Dashboard';
 import ForgotPassScreen from './screens/forgotpass';
 import VeriResetPassScreen from './screens/veriresetpass';
 import ResetPassScreen from './screens/resetpass';
@@ -28,7 +27,6 @@ export default class App extends React.Component {
             <Stack.Screen name="VeriResetPass" component={VeriResetPassScreen} />
             <Stack.Screen name="ResetPass" component={ResetPassScreen} />
             <Stack.Screen name="Verification" component={VerificationScreen} />
-            <Stack.Screen name="Dashboard" component={DashboardScreen} />
             <Stack.Screen name="Report" component={ReportScreen} />
             <Stack.Screen name="Incident" component={IncidentScreen} />
           </Stack.Navigator>

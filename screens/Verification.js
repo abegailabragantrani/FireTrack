@@ -11,7 +11,7 @@ export default class VerificationScreen extends React.Component {
             <View style={styles.container}>
                 <Image style={styles.image}
                     source={require('./drawnav/1.png')} />
-            <Text>A 4 digit code has been sent to your email</Text>
+            <Text style={{textAlign: 'center', bottom: 90 }}>A 4 digit code has been sent to your email</Text>
 
                 <TextInput
                     keyboardType={"number-pad"}
@@ -44,7 +44,7 @@ export default class VerificationScreen extends React.Component {
 
 
 
-                <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: -230 }}>
+                <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: -320 }}>
                 <TouchableOpacity
                         onPress={() => this.props.navigation.navigate('Home')}
                         style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 1, borderWidth: 1, borderColor: '#000000' }}
@@ -64,8 +64,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        color: 'white',
-        bottom: 100,
+        backgroundColor: 'white',
+        
     },
     otp1: {
         backgroundColor: "white",
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         marginRight: 220,
         height: 50,
-        top: 10,
+        bottom: 80,
         marginTop: 50,
         borderRadius: 5,
         borderWidth: 1,
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
         width: 50,
         marginRight: 85,
         height: 50,
-        bottom: 89,
+        bottom: 180,
         marginTop: 50,
         borderRadius: 5,
         borderWidth: 1,
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
         marginLeft: 60,
         width: 50,
         height: 50,
-        bottom: 189,
+        bottom: 280,
         marginTop: 50,
         borderRadius: 5,
         borderWidth: 1,
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
         width: 50,
         marginLeft: 210,
         height: 50,
-        bottom: 289,
+        bottom: 380,
         marginTop: 50,
         borderRadius: 5,
         borderWidth: 1,
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
         left: 3,
         height: 270,
         width: 370,
-        top: 110,
+        bottom: 0,
     },
 
 }

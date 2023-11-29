@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { Button } from 'react-native';
 import "react-native-gesture-handler";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Account from "./drawnav/Account";
@@ -18,7 +17,6 @@ export default class MainScreen extends React.Component {
 
       <Drawer.Navigator drawerContent={props => <DrawerNav{...props} />}
         screenOptions={{
-          headerShown: false,
           drawerActiveBackgroundColor: '#FB9246',
           drawerActiveTintColor: '#fff',
           drawerInactiveTintColor: '#333',

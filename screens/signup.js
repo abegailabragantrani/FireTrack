@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        top: 50,
+        backgroundColor: 'white',
     },
     fields: {
         height: 45,
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     left: 3,
     height: 250,
     width: 370,
-    top: 10,
+    top: 40,
     },
 
 });

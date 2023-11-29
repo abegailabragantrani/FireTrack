@@ -55,7 +55,7 @@ export default class ReportScreen extends React.Component {
                         }
                         }
                     />
-                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 18, left: 20, color: '#FB9246' }} />
+                    <Icon name="location-pin" size={20} color="#ccc" style={{ position: 'absolute', top: 18, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Purok/Sitio"
@@ -66,7 +66,7 @@ export default class ReportScreen extends React.Component {
                         }
                     />
 
-                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 75, left: 20, color: '#FB9246' }} />
+                    <Icon name="location-pin" size={20} color="#ccc" style={{ position: 'absolute', top: 75, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Barangay"
@@ -77,7 +77,7 @@ export default class ReportScreen extends React.Component {
                         }
                     />
 
-                    <Icon name="lock" size={20} color="#ccc" style={{ position: 'absolute', top: 133, left: 20, color: '#FB9246' }} />
+                    <Icon name="location-pin" size={20} color="#ccc" style={{ position: 'absolute', top: 133, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Municipality"
@@ -99,7 +99,7 @@ export default class ReportScreen extends React.Component {
                         }
                     />
 
-                    <Icon name="envelope" size={20} color="#ccc" style={{ position: 'absolute', top: 248, left: 20, color: '#FB9246' }} />
+                    <Icon name="location-pin" size={20} color="#ccc" style={{ position: 'absolute', top: 248, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Zipcode"
@@ -113,14 +113,14 @@ export default class ReportScreen extends React.Component {
                     <Icon name="phone" size={20} color="#ccc" style={{ position: 'absolute', top: 303, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="Time"
+                        placeholder="clock"
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),
                                 this.setState({ password: text })
                         }
                         }
                     />
-                    <Icon name="phone" size={20} color="#ccc" style={{ position: 'absolute', top: 362, left: 20, color: '#FB9246' }} />
+                    <Icon name="calendar" size={20} color="#ccc" style={{ position: 'absolute', top: 362, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Date"
@@ -130,7 +130,7 @@ export default class ReportScreen extends React.Component {
                         }
                         }
                     />
-                    <Icon name="phone" size={20} color="#ccc" style={{ position: 'absolute', top: 420, left: 20, color: '#FB9246' }} />
+                    <Icon name="picture" size={20} color="#ccc" style={{ position: 'absolute', top: 420, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Attach Image"

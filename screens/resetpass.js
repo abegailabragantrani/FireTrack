@@ -81,10 +81,8 @@ export default class ResetPassScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
-        color: 'white',
-        bottom: 80,
+        backgroundColor: 'white',
     },
     fields: {
         height: 50,

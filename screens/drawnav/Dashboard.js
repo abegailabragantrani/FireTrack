@@ -7,21 +7,21 @@ export default function Dashboard() {
   return (
     <View style={styles.container}>
       <Image style={styles.image}
-        source={require('../drawnav/1.png')} />
+        source={require('../drawnav/dashb.png')} />
 
       <View style={styles.top} />
       <View style={styles.bottom} />
 
       <TouchableOpacity
         onPress={() => this.props.navigation.navigate('Report')}
-        style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 20, borderWidth: 1, borderColor: '#000000' }}
+        style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', bottom: 50, borderRadius: 15, marginBottom: 20, borderWidth: 1, borderColor: '#000000' }}
       >
         <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>Report Fire Incident</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         onPress={() => this.props.navigation.navigate('Incident')}
-        style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 20, borderWidth: 1, borderColor: '#000000' }}
+        style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', bottom: 40,  borderRadius: 15, marginBottom: 20, borderWidth: 1, borderColor: '#000000' }}
       >
         <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>View Incident Status</Text>
       </TouchableOpacity>
@@ -41,21 +41,13 @@ const styles = StyleSheet.create({
   },
   bottom: {
     position: 'absolute',
-    top: 300,
+    top: 280,
     left: 0,
     right: 0,
     bottom: 0,
     backgroundColor: '#FFFFFF',
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
-  },
-  top: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    
   },
   fields: {
     height: 50,
@@ -72,10 +64,11 @@ const styles = StyleSheet.create({
   },
   image: {
     right: 10,
-    left: 3,
-    height: 270,
-    width: 370,
-    bottom: 40,
+    left: 25,
+    height: 350,
+    width: 550,
+    bottom: 140,
+    
   },
 
 }

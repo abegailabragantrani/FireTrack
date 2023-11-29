@@ -21,7 +21,7 @@ export default function Dashboard() {
 
       <TouchableOpacity
         onPress={() => this.props.navigation.navigate('Incident')}
-        style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', bottom: 40,  borderRadius: 15, marginBottom: 20, borderWidth: 1, borderColor: '#000000' }}
+        style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', bottom: 40, borderRadius: 15, marginBottom: 20, borderWidth: 1, borderColor: '#000000' }}
       >
         <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>View Incident Status</Text>
       </TouchableOpacity>

@@ -2,7 +2,6 @@ import * as React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import {TouchableOpacity } from 'react-native-gesture-handler'
 
-
 export default function Dashboard() {
   return (
     <View style={styles.container}>
@@ -11,14 +10,6 @@ export default function Dashboard() {
 
       <View style={styles.top} />
       <View style={styles.bottom} />
-
-      <TouchableOpacity onPress={() => navigation.openDrawer()}>
-            <Image
-              source={require('../drawnav/1.png')}
-              style={{width: 35, height: 35}}
-              imageStyle={{borderRadius: 25}}
-            />
-          </TouchableOpacity>
 
       <TouchableOpacity
         onPress={() => this.props.navigation.navigate('Report')}
@@ -78,6 +69,5 @@ const styles = StyleSheet.create({
     bottom: 140,
     
   },
-
 }
 );

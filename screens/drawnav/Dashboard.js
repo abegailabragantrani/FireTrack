@@ -12,6 +12,14 @@ export default function Dashboard() {
       <View style={styles.top} />
       <View style={styles.bottom} />
 
+      <TouchableOpacity onPress={() => navigation.openDrawer()}>
+            <Image
+              source={require('../drawnav/1.png')}
+              style={{width: 35, height: 35}}
+              imageStyle={{borderRadius: 25}}
+            />
+          </TouchableOpacity>
+
       <TouchableOpacity
         onPress={() => this.props.navigation.navigate('Report')}
         style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', bottom: 50, borderRadius: 15, marginBottom: 20, borderWidth: 1, borderColor: '#000000' }}

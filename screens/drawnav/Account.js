@@ -7,6 +7,7 @@ export default function Account() {
     <View style={styles.container}>
       <Image style={styles.image}
         source={require('../drawnav/user.png')} />
+        <Text>Profile</Text>
 
       <View style={styles.top} />
     </View>
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
   image: {
     right: 10,
     left: 25,
-    height: 350,
+    height: 100,
     width: 550,
     bottom: 100
   },

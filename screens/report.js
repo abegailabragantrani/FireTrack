@@ -113,7 +113,7 @@ export default class ReportScreen extends React.Component {
                     <Icon name="phone" size={20} color="#ccc" style={{ position: 'absolute', top: 303, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="clock"
+                        placeholder="Clock"
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),
                                 this.setState({ password: text })

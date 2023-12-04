@@ -6,11 +6,12 @@ import LoginScreen from './screens/login';
 import SignupScreen from './screens/signup';
 import MainScreen from './screens/main';
 import ReportScreen from './screens/report';
-import IncidentScreen from './screens/incidents';
+import IncidentScreen from './screens/incident';
 import VerificationScreen from './screens/Verification';
 import ForgotPassScreen from './screens/forgotpass';
 import VeriResetPassScreen from './screens/veriresetpass';
 import ResetPassScreen from './screens/resetpass';
+import ProfileScreen from './screens/profile';
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,7 @@ export default class App extends React.Component {
             <Stack.Screen name="Home" component={LoginScreen} />
             <Stack.Screen name="Signup" component={SignupScreen} />
             <Stack.Screen name="Main" component={MainScreen} />
+            <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="ForgotPass" component={ForgotPassScreen} />
             <Stack.Screen name="VeriResetPass" component={VeriResetPassScreen} />
             <Stack.Screen name="ResetPass" component={ResetPassScreen} />

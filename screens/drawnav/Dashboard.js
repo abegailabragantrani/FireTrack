@@ -1,29 +1,33 @@
 import * as React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
-import {TouchableOpacity } from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import { useNavigation } from '@react-navigation/native';
 
 export default function Dashboard() {
+  const navigation = useNavigation();
   return (
+    
     <View style={styles.container}>
       <Image style={styles.image}
-        source={require('../drawnav/dashb.png')} />
+        source={require('../drawnav/1.png')} />
 
       <View style={styles.top} />
-      <View style={styles.bottom} />
 
+      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
       <TouchableOpacity
-        onPress={() => this.props.navigation.navigate('Report')}
-        style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', bottom: 50, borderRadius: 15, marginBottom: 20, borderWidth: 1, borderColor: '#000000' }}
+        onPress={() => navigation.navigate('Report')}
+        style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 15, borderWidth: 1, borderColor: '#000000' }}
       >
         <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>Report Fire Incident</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => this.props.navigation.navigate('Incident')}
-        style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', bottom: 40, borderRadius: 15, marginBottom: 20, borderWidth: 1, borderColor: '#000000' }}
+        onPress={() => navigation.navigate('Incident')}
+        style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 15, borderWidth: 1, borderColor: '#000000' }}
       >
         <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>View Incident Status</Text>
       </TouchableOpacity>
+      </View>
     </View>
 
 
@@ -36,9 +40,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    color: 'white',
+    backgroundColor: '#FB9246',
   },
-  bottom: {
+  top: {
     position: 'absolute',
     top: 280,
     left: 0,
@@ -62,12 +66,9 @@ const styles = StyleSheet.create({
 
   },
   image: {
-    right: 10,
-    left: 25,
-    height: 350,
-    width: 550,
-    bottom: 140,
-    
+    height: 270,
+    width: 400,
+    bottom: 100, 
   },
 }
 );

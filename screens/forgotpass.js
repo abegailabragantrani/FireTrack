@@ -8,6 +8,7 @@ import { ActivityIndicator } from "react-native";
 
 
 
+
 export default class ForgotPassScreen extends React.Component {
 
     constructor(props) {
@@ -51,14 +52,25 @@ export default class ForgotPassScreen extends React.Component {
             <View style={styles.container}>
 
                 <Image style={styles.image}
-                 source={require('./drawnav/1.png')} />
+                    source={require('./drawnav/1.png')} />
 
-                <Animatable.View
-                    ref={this.validateInput}
-                >
-                    <Icon name="envelope" size={20} style={{ position: 'absolute', top: 25, left: 20, color: '#FB9246' }} />
+                <Animatable.View>
+                    <View style={styles.loginLblCon}>
+                        <Text style={styles.forgot}>Forgot Password?</Text>
+                    </View>
+                    <View style={styles.forgotDes}>
+                        <Text style={styles.mssg}>
+                            Don't worry! It happens, please enter the address
+                            associated
+                        </Text>
+                        <Text style={styles.mssg}>
+                            with your account.
+                        </Text>
+                    </View>
+
+                    <Icon name="envelope" size={20} style={{ position: 'absolute', top: 106, left: 54, color: '#FB9246' }} />
                     <TextInput
-                        placeholder="Email"
+                        placeholder="Please enter your email"
                         style={styles.fields}
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' })
@@ -74,7 +86,7 @@ export default class ForgotPassScreen extends React.Component {
                     </TouchableOpacity>
                 </Animatable.View>
 
-                <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 60 }}>
+                <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 60, bottom: 25 }}>
                     <TouchableOpacity
                         onPress={()=>this.handleForgotPass()}
                         style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 20, borderWidth: 1, borderColor: '#000000' }}
@@ -104,8 +116,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        color: 'white',
-        bottom: 40,
+        backgroundColor: 'white',
     },
     fields: {
         height: 50,
@@ -117,15 +128,29 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 30,
         borderTopLeftRadius: 30,
         backgroundColor: '#d3d3d3d3',
+        left: 30,
+
 
     },
     image: {
-    right: 10,
-    left: 3,
-    height: 270,
-    width: 370,
-    top: 60,
-},
+        right: 10,
+        left: 3,
+        height: 270,
+        width: 370,
+        top: 60,
+    },
+    mssg: {
+        position: 'relative',
+        bottom: 10,
+        left: 1,
+    },
+    forgot: {
+        color: '#FB9246',
+        fontWeight: 'bold',
+        fontSize: 30,
+        bottom: 20,
+        left: 1,
+    },
 
-}    
+}
 );

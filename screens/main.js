@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { Button } from 'react-native';
 import "react-native-gesture-handler";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Account from "./drawnav/Account";

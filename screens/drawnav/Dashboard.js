@@ -50,33 +50,37 @@ export default DashboardScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  image: {
-    right: 10,
-    left: 3,
-    height: 270,
-    width: 370,
-    top: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FB9246',
   },
   top: {
     position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: '#FB9246',
-  },
-  bottom: {
-    position: 'absolute',
-    top: 250,
+    top: 280,
     left: 0,
     right: 0,
     bottom: 0,
     backgroundColor: '#FFFFFF',
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
+  },
+  fields: {
+    height: 50,
+    width: 300,
+    top: 31,
+    margin: 15,
+    paddingHorizontal: 40,
+    borderBottomRightRadius: 30,
+    borderBottomLeftRadius: 30,
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
+    backgroundColor: '#d3d3d3d3',
 
   },
-
+  image: {
+    height: 270,
+    width: 400,
+    bottom: 100, 
+  },
 }
 );

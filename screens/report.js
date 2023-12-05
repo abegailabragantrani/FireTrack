@@ -45,7 +45,7 @@ export default class ReportScreen extends React.Component {
                 <Animatable.View
                     ref={this.validateInput}
                 >
-                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', bottom: 444, left: 20, color: '#FB9246' }} />
+                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', bottom: 560, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Complete Address"
@@ -55,7 +55,7 @@ export default class ReportScreen extends React.Component {
                         }
                         }
                     />
-                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 18, left: 20, color: '#FB9246' }} />
+                    <Icon name="location-pin" size={20} color="#ccc" style={{ position: 'absolute', top: 18, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Purok/Sitio"
@@ -66,7 +66,7 @@ export default class ReportScreen extends React.Component {
                         }
                     />
 
-                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 75, left: 20, color: '#FB9246' }} />
+                    <Icon name="location-pin" size={20} color="#ccc" style={{ position: 'absolute', top: 75, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Barangay"
@@ -77,11 +77,10 @@ export default class ReportScreen extends React.Component {
                         }
                     />
 
-                    <Icon name="lock" size={20} color="#ccc" style={{ position: 'absolute', top: 133, left: 20, color: '#FB9246' }} />
+                    <Icon name="location-pin" size={20} color="#ccc" style={{ position: 'absolute', top: 133, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Municipality"
-                        secureTextEntry={true}
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),
                                 this.setState({ password: text })
@@ -93,7 +92,6 @@ export default class ReportScreen extends React.Component {
                     <TextInput
                         style={styles.fields}
                         placeholder="Province"
-                        secureTextEntry={true}
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),
                                 this.setState({ password: text })
@@ -101,11 +99,10 @@ export default class ReportScreen extends React.Component {
                         }
                     />
 
-                    <Icon name="envelope" size={20} color="#ccc" style={{ position: 'absolute', top: 248, left: 20, color: '#FB9246' }} />
+                    <Icon name="location-pin" size={20} color="#ccc" style={{ position: 'absolute', top: 248, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Zipcode"
-                        secureTextEntry={true}
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),
                                 this.setState({ password: text })
@@ -116,8 +113,27 @@ export default class ReportScreen extends React.Component {
                     <Icon name="phone" size={20} color="#ccc" style={{ position: 'absolute', top: 303, left: 20, color: '#FB9246' }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="Time"
-                        secureTextEntry={true}
+                        placeholder="Clock"
+                        onChangeText={(text) => {
+                            this.setState({ errMsg: '' }),
+                                this.setState({ password: text })
+                        }
+                        }
+                    />
+                    <Icon name="calendar" size={20} color="#ccc" style={{ position: 'absolute', top: 362, left: 20, color: '#FB9246' }} />
+                    <TextInput
+                        style={styles.fields}
+                        placeholder="Date"
+                        onChangeText={(text) => {
+                            this.setState({ errMsg: '' }),
+                                this.setState({ password: text })
+                        }
+                        }
+                    />
+                    <Icon name="picture" size={20} color="#ccc" style={{ position: 'absolute', top: 420, left: 20, color: '#FB9246' }} />
+                    <TextInput
+                        style={styles.fields}
+                        placeholder="Attach Image"
                         onChangeText={(text) => {
                             this.setState({ errMsg: '' }),
                                 this.setState({ password: text })
@@ -134,13 +150,7 @@ export default class ReportScreen extends React.Component {
                         onPress={() => this.onLogin()}
                         style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 1, borderWidth: 1, borderColor: '#000000' }}
                     >
-                        <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>Continue</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        onPress={() => this.props.navigation.navigate('Home')}
-                    >
-                        <Text style={{ textAlign: 'center', color: '#FB9246', fontSize: 16 }}>Already have an account? Log in..</Text>
+                        <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>Report</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -154,7 +164,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        top: 50,
+        top: 40,
     },
     fields: {
         height: 45,
@@ -169,11 +179,11 @@ const styles = StyleSheet.create({
         bottom: 55,
     },
     image: {
-    right: 10,
-    left: 3,
-    height: 250,
-    width: 370,
-    top: 10,
+        right: 10,
+        left: 3,
+        height: 250,
+        width: 370,
+        top: 40,
     },
 
 });

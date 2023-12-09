@@ -12,34 +12,23 @@ import { NativeModules } from "react-native";
 import apiService from '../api/config';
 import { removeCreds } from '../lib/TokenHandler';
 import {Alert} from 'react-native';
+import { AuthContext } from '../context/Auth';
+
 
 
 
 const Drawer = createDrawerNavigator();
 
 const MainScreen = (props)=> {
-  const handleLogout = async() => {
-    try {
-      const request = await apiService.get('/logout');
-      if(request){
-        props.navigation.navigate('Home')
-        await removeCreds()
-      }
-      
-    } catch (error) {
-      console.log('Error logout',error);
-    }
-    
-  }
-
+  const {Logout} = React.useContext(AuthContext)
+  
   const alertButton = () =>
     Alert.alert('Logout', 'Are you sure?', [
       {
         text: 'Cancel',
-        onPress: () => console.log('Cancel Pressed'),
         style: 'cancel',
       },
-      {text: 'Logout', onPress: async() => await handleLogout()},
+      {text: 'Logout', onPress:()=> Logout()},
     ]);
     return (
 

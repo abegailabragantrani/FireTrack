@@ -41,7 +41,6 @@ export default class ChangePass extends React.Component {
                 password:this.state.password,
                 password_confirmation:this.state.password_confirmation
             }
-            console.log(payload);
             const request = await apiService.post('/reset-submit', payload, {
             'Accept': 'application/json',
             });
@@ -51,7 +50,6 @@ export default class ChangePass extends React.Component {
             this.setState({ loading: false })
         } catch (error) {
             this.setState({ loading: false })
-            console.log(error);
             if(error.response.status===422){
                 this.setState({ error: 'Password does not match' })
             }

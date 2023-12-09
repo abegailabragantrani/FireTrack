@@ -5,12 +5,11 @@ import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import apiService from '../api/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getToken } from '../lib/TokenHandler';
-
-
+import { getToken,setStorage } from '../lib/TokenHandler';
+import { AuthContext } from '../context/Auth';
 
 export default class LoginScreen extends React.Component {
-
+    static contextType = AuthContext
     constructor(props) {
         super(props)
         this.validateInput = React.createRef()
@@ -20,62 +19,27 @@ export default class LoginScreen extends React.Component {
         password: "",
         errMsg: ""
     }
-         
-
-    onLogin = async () => {
-        // if (this.state.username == 'Abe' && this.state.password == 'pretty') {
-        //     this.props.navigation.navigate('Main')
-        // } else {
-        //     this.validateInput.current.shake(800)
-        //     this.setState({ errMsg: 'Invalid login details. Try again!' })
-        // }
-      
-
-        try {
-            const payload = {
-                email:this.state.username,
-                password:this.state.password
-            }
-            const request = await apiService.post('/login', payload, {
-            'Accept': 'application/json',
-            });
-
-            setToken = async (token) =>{
-                 try {
-                    await AsyncStorage.setItem('token', token);
-                } catch (error) {
-                    
-                }
-            }
-            if(request.data.token){
-                setToken(request.data.token);
-            }
-            if(await getToken()){
-                this.setState({ password: '' })
-                this.setState({ username: '' })
-                this.setState({ errMsg: '' })
-                this.props.navigation.navigate('Main')
-                 
-            }
-            return request;
-        } catch (error) {
-            if(error.response.status===422){
-                this.setState({ errMsg: 'Your username or password is incorrect' })
-            }
-            return error;
-        }
-        
-    }
-
-     
-
-
-
-
 
     render() {
-        return (
+        const handleLogin = async () => {
+           await this.context.Login({
+                email: this.state?.username,
+                password: this.state.password
+            })
+            if(this.context.state?.error?.message==='Network Error'){
+                 this.setState({ errMsg: this.context.state?.error?.message });
+            }
+            if(this.context.state?.error?.response?.status===422){
+                 this.setState({ errMsg: 'The provided credentials are incorrect.' });
+            }
+            if(this.context.state?.error?.response?.data?.message === 'SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `users` where `email` is null limit 1)'){
+                this.setState({ errMsg: 'No database connection' });
+            }
 
+
+        }
+        
+        return (
             <View style={styles.container}>
                 <Image style={styles.image}
                  source={require('./drawnav/1.png')} />
@@ -118,7 +82,7 @@ export default class LoginScreen extends React.Component {
 
                 <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 5, top: 30 }}>
                     <TouchableOpacity
-                        onPress={() => this.onLogin()}
+                        onPress={handleLogin}
                         style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 15, borderWidth: 1, borderColor: '#000000' }}
                     >
                         <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>Login</Text>

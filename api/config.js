@@ -24,8 +24,18 @@ apiService.interceptors.request.use(
     }
     return config
   },
+    function (error)  {
+      console.log(error);
+      throw error
+  }
+);
+
+apiService.interceptors.response.use(
+  async function  (config)  {
+    return config
+  },
   function (error)  {
-    Promise.reject(error)
+    throw error
   }
 );
 

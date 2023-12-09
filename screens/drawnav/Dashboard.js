@@ -10,7 +10,6 @@ import { removeCreds } from '../../lib/TokenHandler'
           const request = await apiService.get('/user');
           return request;
         } catch (error) {
-          console.log('error dashboard',error);
           if (error.response.status===401) {
            await removeCreds()
           }

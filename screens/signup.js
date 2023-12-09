@@ -52,7 +52,6 @@ export default class SignupScreen extends React.Component {
            info:info
          
         }
-        console.log(payload);
         
         const response = await apiService.post('/register',payload)
         if(response){
@@ -61,7 +60,6 @@ export default class SignupScreen extends React.Component {
 
         this.setState({ loading: false })
         } catch (error) {
-            console.log(error);
             this.setState({ loading: false })
             if(error.response.data.errors){
                 this.setState({ error: Object.values(error.response.data.errors) })

@@ -2,11 +2,13 @@ import Axios from 'axios';
 import { getToken } from '../lib/TokenHandler';
 import { Platform } from 'react-native';
 
+// CHANGE THE IP ADDRESS BELOW TO YOUR LOCAL IP ADDRESS
+// In my case my local IP address is 192.168.1.31
 
 const baseURL = Platform.OS === 'android' ?
  'http://10.0.2.2:8000/api' 
  : 
- 'http://localhost:8000/api'
+ 'http://192.168.1.31:8000/api'
 
 const apiService =  Axios.create({
   baseURL: baseURL,

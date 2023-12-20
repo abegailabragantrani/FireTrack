@@ -15,6 +15,7 @@ const AuthProvider = (props) => {
             ...prevState,
             token: action.token,
             error:action.error,
+            user:action.user
           };
         case 'LOGOUT':
           return {
@@ -25,12 +26,15 @@ const AuthProvider = (props) => {
           return {
             ...prevState, 
             token: action.token,
+            error:action.error,
+            user:action.user
           }
       }
     },
     {
       token:null,
-      error:null
+      error:null,
+      user:null
     }
   );
 
@@ -39,11 +43,15 @@ const AuthProvider = (props) => {
       let userToken;
       try {
         userToken = await getToken();
+        const res = await apiService.get('/user');
+        if(res?.data){
+          await setStorage('user', JSON.stringify(res?.data));
+          dispatch({ type: 'RESTORE_TOKEN', token: userToken, user:res?.data });
+        }
       } catch (e) {
         // Restoring token failed
 
       }
-      dispatch({ type: 'RESTORE_TOKEN', token: userToken });
     };
 
     bootstrapAsync();
@@ -60,9 +68,10 @@ const AuthProvider = (props) => {
             if(request?.data?.token){
               await setStorage('token',request?.data?.token);
               await setStorage('user', JSON.stringify(request?.data?.user));
-              dispatch({ type: 'LOGIN', token: request?.data?.token });
+              dispatch({ type: 'LOGIN', token: request?.data?.token, user:request?.data?.user });
             }
         } catch (error) {
+          console.log(error);
            dispatch({ type: 'LOGIN', error: error });
           
         }

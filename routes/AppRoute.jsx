@@ -11,6 +11,10 @@ import ForgotPassScreen from '../screens/forgotpass';
 import VerificationScreen from '../screens/Verification'
 import ChangePass from '../screens/ChangePass';
 import { getToken } from '../lib/TokenHandler';
+import TestScreen from '../screens/test';
+import ReportList from '../screens/ReportList';
+import ViewReportedIncident from '../screens/ViewReportedIncident';
+
 const Stack = createStackNavigator();
 
 
@@ -27,8 +31,9 @@ const AppRoute = () => {
               <>
                 <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="Report" component={ReportScreen} />
-                <Stack.Screen name="Incident" component={IncidentScreen} />
+                <Stack.Screen name="Incident" component={ReportList} />
                 <Stack.Screen name="Profile" component={ProfileScreen} />
+                <Stack.Screen name="ViewReportedIncident" component={ViewReportedIncident} />
               </>
                 :
                 <>

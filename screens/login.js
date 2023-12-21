@@ -35,6 +35,9 @@ export default class LoginScreen extends React.Component {
             if(this.context.state?.error?.response?.data?.message === 'SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `users` where `email` is null limit 1)'){
                 this.setState({ errMsg: 'No database connection' });
             }
+            if(this.context.state?.error?.response?.data?.message){
+                this.setState({ errMsg: this.context.state?.error?.response?.data?.message });
+            }
 
 
         }

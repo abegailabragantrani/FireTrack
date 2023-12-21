@@ -68,7 +68,7 @@ const ProfileScreen = (props) => {
         <View style={styles.top} />
 
           <Image style={styles.image}
-            source={{uri: user?.image}} 
+            source={{uri: user?.image?.includes('http://')? user?.image + '?' + new Date().getTime(): user?.image}} 
             
           />
           <Button

@@ -27,7 +27,7 @@ export default function Account(props) {
 
       <View style={{ alignItems: 'center', justifyContent: 'center', bottom: 135, }}>
         <Image style={styles.image}
-          source={{uri: user?.image}} 
+          source={{uri: user?.image + '?' + new Date().getTime()}} 
         />
         <Text style={{ textAlign: 'center', color: '#000000', fontSize: 18, bottom: 40 }}>{user?.name}</Text>
         <TouchableOpacity

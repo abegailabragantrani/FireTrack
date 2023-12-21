@@ -56,7 +56,7 @@ const ReportList = () => {
                         <Text style={styles.location} numberOfLines={10} ellipsizeMode="tail">{item.location}</Text>
                         <View style={{marginBottom:9}}>
                             <Text style={{color:item.status === 'pending'?"orange":"green", fontSize:12}}>
-                                {item.status === 'pending' ? 'Status: Pending' : 'Status: Resolved'}
+                                {item.status === 'pending' ? `Status: ${item.status}` : `Status: ${item.status}`}
                             </Text>
                         </View>
                     </View>

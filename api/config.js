@@ -8,7 +8,7 @@ import { Platform } from 'react-native';
 const baseURL = Platform.OS === 'android' ?
  'http://10.0.2.2:8000/api' 
  : 
- 'http://192.168.1.31:8000/api'
+ 'http://192.168.1.7:8000/api'
 
 const apiService =  Axios.create({
   baseURL: baseURL,

@@ -34,8 +34,8 @@ const SelectComponent = ({handleSelect}) => {
                 style={styles.selectedItemContainer}
                 onPress={() => setOpen(!open??true)}
             >
-                    <Text >
-                        Type
+                    <Text style={{fontSize:10}}>
+                        Fire type
                     </Text>
                 
                     <Text style={styles.selectedItemText}>
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 10,
-        borderRadius:10
+        borderRadius:10,
     },
     selectedItemText: {
         fontSize: 16,
@@ -75,9 +75,12 @@ const styles = StyleSheet.create({
     },
     dropdownList: {
         width: 200,
-        maxHeight: 200,
+        height: 200,
         backgroundColor: '#f5f5f5',
-        borderRadius:10
+        borderRadius:10,
+        overflow:'hidden',
+        zIndex:0,
+        position:'absolute',
     },
     itemContainer: {
         padding: 10,

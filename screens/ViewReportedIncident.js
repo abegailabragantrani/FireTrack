@@ -28,7 +28,7 @@ const ViewReportedIncident = ({route}) => {
                
 
                 <Text style={styles.title}>{item.type} Fire Incident</Text>
-            <Text style={{fontSize:13, color:'white', fontWeight:15, marginBottom:6}}>{DateFormatter(item.created_at)}</Text>
+            <Text style={{fontSize:13, color:'white', fontWeight:15, marginBottom:6}}>{item.created_at}</Text>
                 <Text style={styles.description}>
                     {item.location}
                 </Text>

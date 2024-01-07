@@ -36,14 +36,14 @@ const AvatarScreen = () => {
 
             let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High });
             setLocation(location);
-
-            if(location){
+            const stations = await FireStations()
+            if(location&&stations){
                     let addressResponse = await Location.reverseGeocodeAsync({
                         latitude: location.coords.latitude,
                         longitude: location.coords.longitude,
                     });
                 const {latitude, longitude} = location.coords;     
-                const stationsDistance = FireStations.map((fireStation) => {
+                const stationsDistance = stations.map((fireStation) => {
                    let distance = getDistance(
                         {latitude, longitude},
                         {latitude: fireStation.latitude, longitude: fireStation.longitude}
@@ -101,7 +101,6 @@ const AvatarScreen = () => {
         
     }
     
-
     return (
         <View style={{ flex: 1, backgroundColor:'black' }}>
             {hasPermission === null ? (

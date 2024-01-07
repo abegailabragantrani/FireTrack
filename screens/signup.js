@@ -57,12 +57,20 @@ export default class SignupScreen extends React.Component {
         if(response){
             this.props.navigation.navigate('Home')
         }
-
         this.setState({ loading: false })
         } catch (error) {
             this.setState({ loading: false })
+          console.log(error.response.data.errors);
             if(error.response.data.errors){
                 this.setState({ error: Object.values(error.response.data.errors) })
+            }
+
+            if(error?.message === 'Network Error'){
+                this.setState({error: [error.message]})
+            }
+
+            if(error.response.data.message){
+                this.setState({error: [error.response.data.message]})
             }
             
         }
@@ -153,11 +161,11 @@ export default class SignupScreen extends React.Component {
                     
 
                 </Animatable.View>
-                {this.state.error.map((err)=>
+                {this.state.error.map((err,key)=>
                 { 
                 if(err){
                     return(
-                         <Text style={{ color: 'red', textAlign: 'center', top: -60 }}>
+                         <Text style={{ color: 'red', textAlign: 'center', top: -60 }} key={key}>
                             {err}
                         </Text>
                     )  

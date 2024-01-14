@@ -92,7 +92,10 @@ const AvatarScreen = () => {
             });
             navigation.navigate('Incident');
         } catch (error) {
-            
+            console.log(error.response.data);
+            if(error.response.data.msg){
+                Alert.alert(error.response.data.msg);
+            }
         }
         
 
@@ -145,12 +148,27 @@ const AvatarScreen = () => {
                     </View>
                 </View>
              
-                    <View style={{backgroundColor:'white', height:'20%', justifyContent:'space-between', borderRadius:20}}>
-                        <View style={{zIndex:10, flexDirection:'row', height:'40%', justifyContent:'space-between', marginLeft:20, marginRight:20, alignItems:'center'}}>
-                             <View style={{width:'50%', paddingTop:20, height:'50%'}}>
-                                <SelectComponent
+                    <View style={{backgroundColor:'white', height:'15%', justifyContent:'space-between', borderRadius:20}}>
+                        <View style={{zIndex:10, flexDirection:'row', height:'100%', justifyContent:'space-between', marginLeft:20, marginRight:20, alignItems:'center'}}>
+                             <View style={{width:'50%', paddingTop:20, }}>
+                                {/* <SelectComponent
                                     handleSelect={handleSelect}
-                                />
+                                /> */}
+
+                                  <TouchableOpacity
+                                    style={{
+                                        backgroundColor: address && camera ? 'orange' : 'gray',
+                                        borderRadius: 10,
+                                        width:"100%",
+                                        alignItems:'center',
+                                        paddingTop:10,
+                                        paddingBottom:10,
+                                    }}
+                                    disabled={address && camera ? false : true}
+                                    onPress={alertButton}
+                                >
+                                    <Text style={{ color: 'white', fontSize: 16 }}>Report incident</Text>
+                                </TouchableOpacity>
                             </View>
                             <View style={{width:'46%',  paddingTop:20}}>
                                 {nearbyFireStation&&
@@ -166,7 +184,7 @@ const AvatarScreen = () => {
                             </View>
                         </View>
                     
-                        <View style={{height:"40%", width:'100%', alignItems:'center', marginBottom:10}}>
+                        {/* <View style={{height:"40%", width:'100%', alignItems:'center', marginBottom:10}}>
                                 <TouchableOpacity
                                     style={{
                                         backgroundColor: address && camera ? 'orange' : 'gray',
@@ -181,7 +199,7 @@ const AvatarScreen = () => {
                                 >
                                     <Text style={{ color: 'white', fontSize: 16 }}>Report incident</Text>
                                 </TouchableOpacity>
-                        </View>
+                        </View> */}
                     </View>
             </Camera>
             

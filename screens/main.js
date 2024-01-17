@@ -20,7 +20,7 @@ import { AuthContext } from '../context/Auth';
 const Drawer = createDrawerNavigator();
 
 const MainScreen = (props)=> {
-  const {Logout} = React.useContext(AuthContext)
+  const {Logout, state} = React.useContext(AuthContext)
   
   const alertButton = () =>
     Alert.alert('Logout', 'Are you sure?', [
@@ -61,21 +61,19 @@ const MainScreen = (props)=> {
               <Icon name="home" size={22} color={color} />
             ),
           }} />
-
-        <Drawer.Screen name="My Account" component={Account}
-          options={{
-            drawerIcon: ({ color }) => (
-              <Icon name="user" size={22} color={color} />
-            ),
-          }}
-        />
-
-        <Drawer.Screen name="About Us" component={AboutUs}
-          options={{
-            drawerIcon: ({ color }) => (
-              <Icon name="heart" size={22} color={color} />
-            ),
-          }} />
+        {state?.user?.user_type !== 'admin' &&
+        <><Drawer.Screen name="My Account" component={Account}
+            options={{
+              drawerIcon: ({ color }) => (
+                <Icon name="user" size={22} color={color} />
+              ),
+            }} /><Drawer.Screen name="About Us" component={AboutUs}
+              options={{
+                drawerIcon: ({ color }) => (
+                  <Icon name="heart" size={22} color={color} />
+                ),
+              }} /></>
+        }
 
         {/* <Button name="Logout" component={Logout} 
           options={{

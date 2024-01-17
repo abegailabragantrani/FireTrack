@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, Dimensions } from 'react-native';
 import apiService from '../api/config';
 import { SafeAreaView } from 'react-native';
@@ -7,11 +7,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import BackDrop from '../componets/BackDrop';
 import BackButton from '../componets/BackButton';
+import { AuthContext } from '../context/Auth';
 
 
 
 const ReportList = () => {
     const navigation = useNavigation(); 
+    const {state} = useContext(AuthContext)   
 
     const [data,setData] = useState(
         {
@@ -27,25 +29,29 @@ const ReportList = () => {
     useEffect(() => {
         const fetchData = async () => {
             setData({...data, loading: true });
+            const user_type = state.user?.user_type
             try {
-                const response = await apiService.get('/my-incidents');
+                const response = await apiService.get(user_type==='user'?'/my-incidents':'reported-incidents');
                 console.log(response.data);
                 setData({
                     data: response.data,
                     loading: false,
                 });
             } catch (error) {
-                console.log(error);
+                console.log(error.response.data);
                 setData({ loading: false, data:[] });
             }
           
         }
-        fetchData();
-    }, []);
+         const unsubscribe = navigation.addListener('focus', () => {
+            fetchData()
+         })
+        return unsubscribe
+    }, [navigation]);
 
     const renderItem = ({ item }) => (
         <TouchableOpacity
-            onPress={() => navigation.navigate('ViewReportedIncident', { item })}
+            onPress={() => navigation.navigate(state.user?.user_type ==='user'?'ViewReportedIncident':'UpdateIncident', { item })}
         >
             <View style={styles.itemContainer}>
                 <View>
@@ -56,7 +62,7 @@ const ReportList = () => {
                         <Text style={styles.location} numberOfLines={10} ellipsizeMode="tail">{item.location}</Text>
                         <View style={{marginBottom:9}}>
                             <Text style={{color:item.status === 'pending'?"orange":"green", fontSize:12}}>
-                                {item.status === 'pending' ? `Status: ${item.status}` : `Status: ${item.status}`}
+                                {item.status ? `Status: ${item.status}` : `Status: pending`}
                             </Text>
                         </View>
                     </View>

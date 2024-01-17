@@ -14,13 +14,13 @@ import { getToken } from '../lib/TokenHandler';
 import TestScreen from '../screens/test';
 import ReportList from '../screens/ReportList';
 import ViewReportedIncident from '../screens/ViewReportedIncident';
+import UpdateIncident from '../screens/Admin/UpdateIncident';
 
 const Stack = createStackNavigator();
 
 
 const AppRoute = () => {
     const {state} = useContext(AuthContext)   
-
   return (
         <Stack.Navigator
                 screenOptions={{
@@ -28,6 +28,16 @@ const AppRoute = () => {
                 }}
                 >
                 {state.token?
+           
+              state?.user?.user_type === 'admin'?
+              <>
+                <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="Incident" component={ReportList} />
+                <Stack.Screen name='UpdateIncident' component={UpdateIncident}/>
+
+                {/* <Stack.Screen name='UpdateIncident' component={}/> */}
+              </>
+              :
               <>
                 <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="Report" component={ReportScreen} />
@@ -35,7 +45,7 @@ const AppRoute = () => {
                 <Stack.Screen name="Profile" component={ProfileScreen} />
                 <Stack.Screen name="ViewReportedIncident" component={ViewReportedIncident} />
               </>
-                :
+              :
                 <>
                 <Stack.Screen name="Home" component={LoginScreen} />
                 <Stack.Screen name="Signup" component={SignupScreen} />

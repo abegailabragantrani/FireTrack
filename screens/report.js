@@ -56,6 +56,7 @@ const AvatarScreen = () => {
                 const nearby = stationsDistance.sort((a,b) => a.distance - b.distance)[0];
                 setNearbyFireStation(nearby);
                 setAddress(addressResponse[0]);
+                console.log('address', addressResponse[0]);
             }
             
         })();
@@ -82,7 +83,8 @@ const AvatarScreen = () => {
             image,
             user_id: state.user.id,
             station: nearbyFireStation.address,
-            location: `${address?.street}, ${address?.city}, ${address?.region}, ${address?.country}`
+            location: `${address?.street}, ${address?.city}, ${address?.region}, ${address?.country}`,
+            barangay: address?.district,
         }
         try {
             const res = await apiService.post('/report-incident', payload, {

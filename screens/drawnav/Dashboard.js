@@ -2,8 +2,10 @@ import * as React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet,Image } from 'react-native'
 import apiService from '../../api/config'
 import { removeCreds } from '../../lib/TokenHandler'
+import { AuthContext } from '../../context/Auth'
 
  const  DashboardScreen = (props) => {
+    const {state} = React.useContext(AuthContext)
     React.useEffect(()=>{
       const getUser = async () => {
         try {
@@ -22,13 +24,14 @@ import { removeCreds } from '../../lib/TokenHandler'
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <View style={styles.top} />
         <View style={styles.bottom} />
-
+        {state?.user?.user_type !== 'admin' &&
         <TouchableOpacity
           onPress={() => props.navigation.navigate('Report')}
           style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 20, borderWidth: 1, borderColor: '#000000' }}
         >
           <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>Report Fire Incident</Text>
         </TouchableOpacity>
+        }
 
         <TouchableOpacity
           onPress={() => props.navigation.navigate('Incident')}

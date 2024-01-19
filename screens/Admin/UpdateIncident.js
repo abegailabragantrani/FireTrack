@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { Text, View, StyleSheet, TextInput, Button,ScrollView } from 'react-native'
+import { Text, View, StyleSheet, TextInput, Button,ScrollView, Platform } from 'react-native'
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native';
 import BackButton from '../../componets/BackButton';
@@ -96,6 +96,19 @@ const UpdateIncident = ({route}) => {
 
     const handleDateTime = (event, date) => {
         setResponder({...responder, date:date});
+        if(Platform.OS === 'android'){
+            setShow(!true);
+        }
+    }
+
+    const datepicker = () => {
+        setMode('date');
+        setShow(true);
+    }
+
+    const timepicker = () => {
+        setMode('time');
+        setShow(true);
     }
 
     const handleUpdate = async () => {
@@ -240,6 +253,8 @@ const UpdateIncident = ({route}) => {
                                 Time/Date Reported
                             </Text>
                             <View style={{flex:1, display:'flex', flexDirection:'row', marginBottom:8}}>
+                                {Platform.OS === 'ios' ?
+                                <>
                                 <DateTimePicker 
                                     value={responder.date}
                                     mode={'date'}
@@ -254,6 +269,26 @@ const UpdateIncident = ({route}) => {
                                     display="default"
                                     onChange={handleDateTime}
                                 />
+                                </>
+                                :
+                                <>
+                                <Button
+                                    onPress={datepicker}
+                                    title={responder.date.toLocaleDateString()}
+                                />
+                                <Button
+                                    onPress={timepicker}
+                                    title={responder.date.toLocaleTimeString()}
+                                />
+                                </>
+                                }
+                                { show && 
+                                    <DateTimePicker value={responder.date}
+                                        mode={mode}
+                                        display="default"
+                                        onChange={handleDateTime} 
+                                    />
+                                }
                             </View>
                             <Text style={styles.label}>
                                 Reponding Team

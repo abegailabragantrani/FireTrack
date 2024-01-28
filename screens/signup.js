@@ -17,10 +17,11 @@ export default class SignupScreen extends React.Component {
 
     state = {
 
-        fullname:'',
+        firstname:'',
+        lastname:'',
         gender:'',
         address:'',
-        phone:'',
+        phone_no:'',
         email:'',
         password:'',
         password_confirmation:'',
@@ -42,10 +43,11 @@ export default class SignupScreen extends React.Component {
              const info = {
                 gender:this.state.gender,
                 address:this.state.address,
-                phone:this.state.phone
+                phone_no:this.state.phone_no
             }
         const payload = {
-           name:this.state.fullname,
+           firstname:this.state.firstname,
+           lastname:this.state.lastname,
            email:this.state.email,
            password:this.state.password,
            password_confirmation:this.state.password_confirmation,
@@ -88,16 +90,25 @@ export default class SignupScreen extends React.Component {
                 <Animatable.View
                     ref={this.validateInput}
                 >
-                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', bottom: 415, left: 20, color: '#FB9246' }} />
+                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: -35, left: 20, color: '#FB9246', zIndex:1 }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="fullname"
+                        placeholder="First Name"
                         onChangeText={(text) => {
-                            this.setState({ fullname: text })
+                            this.setState({ firstname: text })
                         }
                         }
                     />
-                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 18, left: 20, color: '#FB9246' }} />
+                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 20, left: 20, color: '#FB9246', zIndex:1 }} />
+                    <TextInput
+                        style={styles.fields}
+                        placeholder="Last Name"
+                        onChangeText={(text) => {
+                            this.setState({ lastname: text })
+                        }
+                        }
+                    />
+                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 75, left: 20, color: '#FB9246', zIndex:1 }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Gender"
@@ -107,7 +118,7 @@ export default class SignupScreen extends React.Component {
                         }
                     />
 
-                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 75, left: 20, color: '#FB9246' }} />
+                    <Icon name="location-pin" size={20} color="#ccc" style={{ position: 'absolute', top: 135, left: 20, color: '#FB9246', zIndex:1 }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="address"
@@ -117,17 +128,17 @@ export default class SignupScreen extends React.Component {
                         }
                     />
 
-                    <Icon name="lock" size={20} color="#ccc" style={{ position: 'absolute', top: 133, left: 20, color: '#FB9246' }} />
+                    <Icon name="phone" size={20} color="#ccc" style={{ position: 'absolute', top: 190, left: 20, color: '#FB9246', zIndex:1 }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="Phone"
+                        placeholder="phone"
                         onChangeText={(text) => {
-                            this.setState({ phone: text })
+                            this.setState({ phone_no: text })
                         }
                         }
                     />
 
-                    <Icon name="location-pin" size={20} color="#ccc" style={{ position: 'absolute', top: 190, left: 20, color: '#FB9246' }} />
+                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 245, left: 20, color: '#FB9246', zIndex:10 }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Email"
@@ -137,7 +148,7 @@ export default class SignupScreen extends React.Component {
                         }
                     />
 
-                    <Icon name="envelope" size={20} color="#ccc" style={{ position: 'absolute', top: 248, left: 20, color: '#FB9246' }} />
+                    <Icon name="lock" size={20} color="#ccc" style={{ position: 'absolute', top: 305, left: 20, color: '#FB9246',  zIndex:10  }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Password"
@@ -148,7 +159,7 @@ export default class SignupScreen extends React.Component {
                         }
                     />
 
-                    <Icon name="phone" size={20} color="#ccc" style={{ position: 'absolute', top: 303, left: 20, color: '#FB9246' }} />
+                    <Icon name="lock" size={20} color="#ccc" style={{ position: 'absolute', top: 360, left: 20, color: '#FB9246',  zIndex:10  }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Confirm Password"

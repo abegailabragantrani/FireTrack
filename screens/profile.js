@@ -48,10 +48,12 @@ const ProfileScreen = (props) => {
 
   const handleUpdate = async () => {
     try {
+      console.log(user);
        const res =  await apiService.post('/update-user',user, {
       'Accept': 'application/json',
     });
      await setStorage('user', JSON.stringify(res.data));
+     console.log(res.data.image);
       // 
       props.navigation.reset({
               index: 0,
@@ -79,13 +81,21 @@ const ProfileScreen = (props) => {
           />
           <View style={{width:'80%', rowGap:4}}>
             <View>
-              <Text style={styles.text}>Name</Text>
+              <Text style={styles.text}>First name</Text>
               <TextInput
                 style={styles.input}
                 onChangeText={(text) => {
-                  setUser({...user,name:text})
+                  setUser({...user,firstname:text})
                 }}
-                defaultValue={user?.name}
+                defaultValue={user?.firstname}
+              />
+              <Text style={styles.text}>Last name</Text>
+               <TextInput
+                style={styles.input}
+                onChangeText={(text) => {
+                  setUser({...user,lastname:text})
+                }}
+                defaultValue={user?.lastname}
               />
             </View>
             <View>
@@ -103,9 +113,9 @@ const ProfileScreen = (props) => {
               <TextInput
               style={styles.input}
                 onChangeText={(text) => {
-                  setUser({...user, info:{...user.info, phone:text}})
+                  setUser({...user, info:{...user.info, phone_no:text}})
                 }}
-                defaultValue={user?.info?.phone}
+                defaultValue={user?.info?.phone_no}
               />
             </View>
             <View style={{alignItems:'center',marginTop:12}}>

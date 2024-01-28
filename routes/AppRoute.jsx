@@ -29,7 +29,7 @@ const AppRoute = () => {
                 >
                 {state.token?
            
-              state?.user?.user_type === 'admin'?
+              parseInt(state?.user?.user_type_id) !== 4 ?
               <>
                 <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="Incident" component={ReportList} />
@@ -44,6 +44,7 @@ const AppRoute = () => {
                 <Stack.Screen name="Incident" component={ReportList} />
                 <Stack.Screen name="Profile" component={ProfileScreen} />
                 <Stack.Screen name="ViewReportedIncident" component={ViewReportedIncident} />
+                <Stack.Screen name="ChangePassword" component={ChangePass} />
               </>
               :
                 <>

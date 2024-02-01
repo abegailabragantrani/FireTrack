@@ -34,6 +34,7 @@ const AppRoute = () => {
                 <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="Incident" component={ReportList} />
                 <Stack.Screen name='UpdateIncident' component={UpdateIncident}/>
+                <Stack.Screen name="Report" component={ReportScreen} />
 
                 {/* <Stack.Screen name='UpdateIncident' component={}/> */}
               </>

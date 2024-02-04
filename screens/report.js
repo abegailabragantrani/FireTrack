@@ -53,10 +53,12 @@ const AvatarScreen = () => {
                         distance: distance,
                     }
                 });
+                // console.log('stationsDistance', stationsDistance);
                 const nearby = stationsDistance.sort((a,b) => a.distance - b.distance)[0];
+                console.log('nearby', nearby);
                 setNearbyFireStation(nearby);
                 setAddress(addressResponse[0]);
-                console.log('address', addressResponse[0]);
+                // console.log('address', addressResponse[0]);
             }
             
         })();
@@ -82,7 +84,7 @@ const AvatarScreen = () => {
             type,
             image,
             user_id: state.user.id,
-            station: nearbyFireStation.address,
+            fire_station_id: nearbyFireStation.id,
             location: `${address?.street}, ${address?.city}, ${address?.region}, ${address?.country}`,
             barangay: address?.district,
         }

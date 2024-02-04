@@ -125,7 +125,7 @@ export default function Account(props) {
                   handleChangePassword()
                 }}
             >
-              <Text style={styles.buttonText}>Click me</Text>
+              <Text style={styles.buttonText}>Change Password</Text>
             </TouchableOpacity>
             </View>
           </View>

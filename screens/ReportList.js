@@ -31,7 +31,7 @@ const ReportList = () => {
             setData({...data, loading: true });
             const user_type = state.user?.user_type
             try {
-                const response = await apiService.get(user_type==='user'?'/my-incidents':'reported-incidents');
+                const response = await apiService.get(parseInt(state.user.user_type_id)===4?'/my-incidents':'reported-incidents');
                 console.log(response.data);
                 setData({
                     data: response.data,
@@ -51,7 +51,7 @@ const ReportList = () => {
 
     const renderItem = ({ item }) => (
         <TouchableOpacity
-            onPress={() => navigation.navigate(state.user?.user_type ==='user'?'ViewReportedIncident':'UpdateIncident', { item })}
+            onPress={() => navigation.navigate(parseInt(state.user.user_type_id)===4?'ViewReportedIncident':'UpdateIncident', { item })}
         >
             <View style={styles.itemContainer}>
                 <View>

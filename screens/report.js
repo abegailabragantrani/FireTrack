@@ -183,7 +183,7 @@ const AvatarScreen = () => {
 
                                     <TouchableOpacity  style={{backgroundColor:'#0583D2', padding:10, borderRadius:10,}} onPress={()=>Linking.openURL(`tel:123`)}> 
                                         <Text style={{ color: 'white', fontWeight:'600', textDecorationLine: 'underline', fontSize:12 , textAlign:'center' }}>
-                                            Call Nearest fire station: {nearbyFireStation?.address}
+                                            Call Nearest fire station: {nearbyFireStation?.name}
                                         </Text>
                                     </TouchableOpacity>
                                 }

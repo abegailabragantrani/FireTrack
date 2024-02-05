@@ -55,7 +55,6 @@ const AvatarScreen = () => {
                 });
                 // console.log('stationsDistance', stationsDistance);
                 const nearby = stationsDistance.sort((a,b) => a.distance - b.distance)[0];
-                console.log('nearby', nearby);
                 setNearbyFireStation(nearby);
                 setAddress(addressResponse[0]);
                 // console.log('address', addressResponse[0]);
@@ -99,6 +98,10 @@ const AvatarScreen = () => {
             console.log(error.response.data);
             if(error.response.data.msg){
                 Alert.alert(error.response.data.msg);
+            }
+
+            if(error.response.data.message === 'The barangay field is required.'){
+                Alert.alert(error.response.data.errors.message);
             }
         }
         

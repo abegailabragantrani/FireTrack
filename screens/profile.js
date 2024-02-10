@@ -7,7 +7,7 @@ import { getStorage } from '../lib/TokenHandler';
 import apiService from '../api/config';
 import { setStorage } from '../lib/TokenHandler';
 
-
+const DefaultIMage = 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'
 
 const ProfileScreen = (props) => {
      const [image, setImage] = React.useState(null);
@@ -70,7 +70,7 @@ const ProfileScreen = (props) => {
         <View style={styles.top} />
 
           <Image style={styles.image}
-            source={{uri: user?.image?.includes('http://')? user?.image + '?' + new Date().getTime(): user?.image}} 
+            source={{uri:user?.image? user?.image?.includes('http://')? user?.image + '?' + new Date().getTime(): user?.image : DefaultIMage }} 
             
           />
           <Button

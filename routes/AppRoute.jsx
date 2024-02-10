@@ -4,7 +4,6 @@ import { AuthContext } from '../context/Auth';
 import LoginScreen from '../screens/login';
 import MainScreen from '../screens/main';
 import ReportScreen from '../screens/report';
-import IncidentScreen from '../screens/incident';
 import ProfileScreen from '../screens/profile';
 import SignupScreen from '../screens/signup';
 import ForgotPassScreen from '../screens/forgotpass';

@@ -58,7 +58,7 @@ export default function Account(props) {
   },[])
   return (
     <View style={styles.container}>
-      <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 18, bottom: 170 }}>Profile</Text>
+      <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 18, bottom: 100 }}>Profile</Text>
       <View style={styles.top} />
 
       <View style={{ alignItems: 'center', justifyContent: 'center', bottom: 135, }}>
@@ -79,58 +79,60 @@ export default function Account(props) {
           onPress={() => setChangePassMode(true)}
           style={{ width: 200, height: 50, backgroundColor: '#171F1D', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 15, borderWidth: 1, borderColor: '#000000' }}
         >
-          <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>Change password</Text>
-        </TouchableOpacity>
-        </>
-        :
-        <View style={{width:'80%'}}>
-          <TextInput
-            placeholder='Current Password'
-            style={styles.fields}
-            onChangeText={(text) => setCurrentPassword(text)}
-            secureTextEntry={true}
-          />
-          <TextInput
-            placeholder='New Password'
-            style={styles.fields}
-            onChangeText={(text) => setPassword(text)}
-            secureTextEntry={true}
-          />
-          <TextInput
-            placeholder='Confirm New Password'
-            style={styles.fields}
-            onChangeText={(text) => setConfirmPassword(text)}
-            secureTextEntry={true}
-          />
-          {error && 
-          <Text style={{ color: 'red', textAlign: 'center', top: -60 }}>
-            {error}
-          </Text>
-          }
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '50%' }}>
-            <View style={{width:'30%'}}>
-              <TouchableOpacity
-                style={styles.cancelButton}
-                onPress={() => {
-                  setChangePassMode(false)
-                }}
-              >
-                <Text style={styles.cancelButtonText}>Cancel</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={{width:'30%'}}>
-          <TouchableOpacity
-                style={styles.button}
-                onPress={() => {
-                  handleChangePassword()
-                }}
-            >
-              <Text style={styles.buttonText}>Change Password</Text>
+         <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>Change password</Text>
             </TouchableOpacity>
+          </>
+          :
+          <View style={{bottom: 50, textAlign: 'center' }}>
+            <Image style={styles.image}
+              source={require('../drawnav/changepassacc.png')} />
+            <TextInput
+              placeholder='Current Password'
+              style={styles.fields}
+              onChangeText={(text) => setCurrentPassword(text)}
+              secureTextEntry={true}
+            />
+            <TextInput
+              placeholder='New Password'
+              style={styles.fields}
+              onChangeText={(text) => setPassword(text)}
+              secureTextEntry={true}
+            />
+            <TextInput
+              placeholder='Confirm New Password'
+              style={styles.fields}
+              onChangeText={(text) => setConfirmPassword(text)}
+              secureTextEntry={true}
+            />
+            {error &&
+              <Text style={{ color: 'red', textAlign: 'center', top: -60 }}>
+                {error}
+              </Text>
+            }
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '50%' }}>
+              <View style={{ width: '30%' }}>
+                <TouchableOpacity
+                  style={styles.cancelButton}
+                  onPress={() => {
+                    setChangePassMode(false)
+                  }}
+                >
+                  <Text style={styles.cancelButtonText}>Cancel</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={{ width: '30%' }}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => {
+                    handleChangePassword()
+                  }}
+                >
+                  <Text style={styles.buttonText}>Click me</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
-      }
+        }
 
       </View>
     </View>
@@ -158,9 +160,10 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 40,
   },
   image: {
-    height: 240,
-    width: 180,
-    bottom: 55
+    height: 350,
+    width: 300,
+    bottom: 80,
+    left: 10
   },
   fields: {
     height: 45,
@@ -186,7 +189,7 @@ const styles = StyleSheet.create({
       fontSize: 16,
   },
   cancelButton: {
-    backgroundColor: 'gray', // Red background
+    backgroundColor: 'gray',
     padding: 10,
     borderRadius: 5,
     width: 100,

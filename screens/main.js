@@ -2,7 +2,6 @@ import * as React from 'react'
 import "react-native-gesture-handler";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Account from "./drawnav/Account";
-import AboutUs from "./drawnav/AboutUs";
 import Logout from './drawnav/Logout';
 import Dashboard from './drawnav/Dashboard';
 import DrawerNav from '../componets/DrawerNav';
@@ -39,6 +38,7 @@ const MainScreen = (props)=> {
           label="Logout"
           onPress={alertButton}
           icon={() => <Icon name="logout" size={22} />} 
+          
         />
         </DrawerContentScrollView>
         }
@@ -47,7 +47,7 @@ const MainScreen = (props)=> {
           drawerActiveTintColor: '#fff',
           drawerInactiveTintColor: '#333',
           drawerLabelStyle: {
-            marginLeft: 25,
+            marginLeft: 10,
             fontSize: 15,
           },
           
@@ -67,12 +67,7 @@ const MainScreen = (props)=> {
               drawerIcon: ({ color }) => (
                 <Icon name="user" size={22} color={color} />
               ),
-            }} /><Drawer.Screen name="About Us" component={AboutUs}
-              options={{
-                drawerIcon: ({ color }) => (
-                  <Icon name="heart" size={22} color={color} />
-                ),
-              }} /></>
+            }} /></>
         }
 
         {/* <Button name="Logout" component={Logout} 

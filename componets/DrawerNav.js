@@ -1,42 +1,29 @@
 import React from 'react';
-import { View, StyleSheet} from 'react-native';
-import { DrawerContentScrollView, DrawerItemList,} from '@react-navigation/drawer';
+import { View, StyleSheet, Image } from 'react-native';
+import { DrawerContentScrollView, DrawerItemList, } from '@react-navigation/drawer';
 
 const DrawerNav = props => {
-    return (
-        <View style={styles.container}>
-              <View style={styles.top} />
-              <View style={styles.bottom} />
-        
-        <DrawerContentScrollView {...props}>
-            <DrawerItemList {...props} />
-        </DrawerContentScrollView>
-        
-        </View>
-    )
+  return (
+    <View style={styles.container}>
+      <Image style={styles.image}
+        source={require('../assets/images/dashboard.jpg')} />
+
+      <DrawerContentScrollView {...props}>
+        <DrawerItemList {...props} />
+      </DrawerContentScrollView>
+
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      paddingTop: 110,
-    },
-    top: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: '95%',
-      backgroundColor: '#FB9246',
-    },
-    bottom: {
-      position: 'absolute',
-      top: 10,
-      left: 0,
-      right: 0,
-      top: '10%',
-      backgroundColor: '#FFFFFF',
-    },
-   });
+  container: {
+    flex: 1,
+  },
+  image:{
+    height: 200,
+    width: undefined,
+  },
+});
 
 export default DrawerNav;

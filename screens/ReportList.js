@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, ImageBackground } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, Dimensions } from 'react-native';
 import apiService from '../api/config';
 import { SafeAreaView } from 'react-native';
@@ -83,7 +83,7 @@ const ReportList = () => {
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'column', justifyContent: 'center', marginTop: 60 }}>
                     <View style={{ marginBottom: 10 }}>
                         <Text style={styles.title}>
-                            My reported fire incidents
+                            Reported Fire Incidents
                         </Text>
                     </View>
                     <View style={{ flex: 1, justifyContent: 'center' }}>
@@ -105,11 +105,7 @@ const ReportList = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        margin: 20,
-        alignItems: 'center',
-        justifyContent: 'center',
-        width:'90%',
-        height:'90%'
+        backgroundColor: '#FDCE91'
     },
      title: {
         fontSize: 20,

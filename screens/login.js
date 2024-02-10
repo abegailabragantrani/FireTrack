@@ -1,11 +1,11 @@
 import * as React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, Text, StyleSheet, ImageBackground } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import apiService from '../api/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getToken,setStorage } from '../lib/TokenHandler';
+import { getToken, setStorage } from '../lib/TokenHandler';
 import { AuthContext } from '../context/Auth';
 
 export default class LoginScreen extends React.Component {
@@ -22,32 +22,31 @@ export default class LoginScreen extends React.Component {
 
     render() {
         const handleLogin = async () => {
-           await this.context.Login({
+            await this.context.Login({
                 email: this.state?.username,
                 password: this.state.password
             })
-            if(this.context.state?.error?.message==='Network Error'){
-                 this.setState({ errMsg: this.context.state?.error?.message });
+            if (this.context.state?.error?.message === 'Network Error') {
+                this.setState({ errMsg: this.context.state?.error?.message });
             }
-            if(this.context.state?.error?.response?.status===422){
-                 this.setState({ errMsg: 'The provided credentials are incorrect.' });
+            if (this.context.state?.error?.response?.status === 422) {
+                this.setState({ errMsg: 'The provided credentials are incorrect.' });
             }
-            if(this.context.state?.error?.response?.data?.message){
+            if (this.context.state?.error?.response?.data?.message) {
                 this.setState({ errMsg: this.context.state?.error?.response?.data?.message });
             }
 
 
         }
-        
+
         return (
             <View style={styles.container}>
-                <Image style={styles.image}
-                 source={require('./drawnav/1.png')} />
-
+                <ImageBackground style={styles.image}
+                    source={require('../assets/images/bg1.png')} />
                 <Animatable.View
                     ref={this.validateInput}
                 >
-                    <Icon name="envelope" size={20} style={{ position: 'absolute', top:61, left: 20, color: '#FB9246' }} />
+                    <Icon name="envelope" size={20} style={{ position: 'absolute', bottom: 620, left: 90, color: '#FB9246' }} />
                     <TextInput
                         placeholder="Email"
                         style={styles.fields}
@@ -58,7 +57,7 @@ export default class LoginScreen extends React.Component {
                         }
                         value={this.state.username}
                     />
-                    <Icon name="lock" size={20} style={{ position: 'absolute', top: 139, left: 20, color: '#FB9246' }} />
+                    <Icon name="lock" size={20} style={{ position: 'absolute', bottom: 550, left: 90, color: '#FB9246' }} />
                     <TextInput
                         placeholder="Password"
                         style={styles.fields}
@@ -71,16 +70,18 @@ export default class LoginScreen extends React.Component {
                         value={this.state.password}
 
                     />
-
                     <Text style={{ color: 'red', textAlign: 'center', top: 40 }}>{this.state.errMsg}</Text>
+                </Animatable.View>
+
+                <View style={{ alignItems: 'center', justifyContent: 'center', left: 50, marginBottom: 5, bottom: 525 }}>
                     <TouchableOpacity
                         onPress={() => this.props.navigation.navigate('ForgotPass')}
                     >
-                        <Text style={{ textAlign: 'center', color: '#FB9246', fontSize: 16, left: 80, bottom: 1 }}>Forgot Password?</Text>
+                        <Text style={{ textAlign: 'center', color: '#FB9246', fontSize: 16, bottom: 1 }}>Forgot Password?</Text>
                     </TouchableOpacity>
-                </Animatable.View>
+                </View>
 
-                <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 5, top: 30 }}>
+                <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 5, bottom: 510 }}>
                     <TouchableOpacity
                         onPress={handleLogin}
                         style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 15, borderWidth: 1, borderColor: '#000000' }}
@@ -93,7 +94,8 @@ export default class LoginScreen extends React.Component {
                     >
                         <Text style={{ textAlign: 'center', color: '#FB9246', fontSize: 16 }}>Don't have an account? Sign up.</Text>
                     </TouchableOpacity>
-                </View>
+                    </View>
+        
 
             </View>
         )
@@ -103,29 +105,25 @@ export default class LoginScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        backgroundColor: 'white',
     },
     fields: {
         height: 50,
-        width: 300,
-        top: 31,
-        margin: 15,
+        alignItems: 'center',
+        width: 250,
+        left: 70,
+        bottom: 505,
+        margin: 10,
         paddingHorizontal: 40,
         borderBottomRightRadius: 30,
         borderBottomLeftRadius: 30,
         borderTopRightRadius: 30,
         borderTopLeftRadius: 30,
         backgroundColor: '#d3d3d3d3',
-
     },
     image: {
-    right: 10,
-    left: 3,
-    height: 270,
-    width: 370,
-    top: 120,
-},
+        height: 900,
+        width: undefined,
+    },
 
-}    
+}
 );

@@ -344,7 +344,7 @@ const UpdateIncident = ({route}) => {
                     </View>
                 </>
                 }
-                <View style={{marginBottom:10}}>
+                <View style={{marginBottom:10, backgroundColor: '#FB9246'}}>
                 <Button
                     title="Update"
                     onPress={handleUpdate}

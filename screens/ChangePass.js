@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, Text, StyleSheet, Image, ImageBackground } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
@@ -18,11 +18,11 @@ export default class ChangePass extends React.Component {
     state = {
         password: "",
         password_confirmation: "",
-        error:'',
-        loading:false
+        error: '',
+        loading: false
 
     }
-         
+
 
     handleChangePass = async () => {
         // if (this.state.username == 'Abe' && this.state.password == 'pretty') {
@@ -31,60 +31,57 @@ export default class ChangePass extends React.Component {
         //     this.validateInput.current.shake(800)
         //     this.setState({ errMsg: 'Invalid login details. Try again!' })
         // }
-      
+
 
         try {
             this.setState({ loading: true })
             const payload = {
-                email:this.props.route.params.email,
-                 code:this.props.route.params.code,
-                password:this.state.password,
-                password_confirmation:this.state.password_confirmation
+                email: this.props.route.params.email,
+                code: this.props.route.params.code,
+                password: this.state.password,
+                password_confirmation: this.state.password_confirmation
             }
             const request = await apiService.post('/reset-submit', payload, {
-            'Accept': 'application/json',
+                'Accept': 'application/json',
             });
-            if(request){
-               this.props.navigation.navigate('Home')
+            if (request) {
+                this.props.navigation.navigate('Home')
             }
             this.setState({ loading: false })
         } catch (error) {
             this.setState({ loading: false })
-            if(error.response.status===422){
+            if (error.response.status === 422) {
                 this.setState({ error: 'Password does not match' })
             }
         }
-        
+
     }
-
-     
-
-
-
-
 
     render() {
         return (
 
             <View style={styles.container}>
+                <ImageBackground style={styles.image1}
+                    source={require('../assets/images/bg2.png')} />
+        <View style={styles.page}>
                 <Image style={styles.image}
-                 source={require('./drawnav/1.png')} />
+                    source={require('../assets/images/changepass.png')} />
 
                 <Animatable.View
                     ref={this.validateInput}
                 >
-                    <Icon name="envelope" size={20} style={{ position: 'absolute', top:61, left: 20, color: '#FB9246' }} />
+                    <Icon name="envelope" size={20} style={{ position: 'absolute', top: 61, left: 75, color: '#FB9246' }} />
                     <TextInput
-                        placeholder="password"
+                        placeholder="New Password"
                         style={styles.fields}
                         onChangeText={(text) => {
                             this.setState({ password: text })
                         }
                         }
                     />
-                    <Icon name="lock" size={20} style={{ position: 'absolute', top: 139, left: 20, color: '#FB9246' }} />
+                    <Icon name="lock" size={20} style={{ position: 'absolute', top: 139, left: 75, color: '#FB9246' }} />
                     <TextInput
-                        placeholder="Confirm password"
+                        placeholder="Confirm Password"
                         style={styles.fields}
                         secureTextEntry
                         onChangeText={(text) => {
@@ -96,7 +93,7 @@ export default class ChangePass extends React.Component {
                     />
 
                     <Text style={{ color: 'red', textAlign: 'center', top: 19 }}>{this.state.error}</Text>
-                
+
                 </Animatable.View>
 
                 <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 5, top: 30 }}>
@@ -105,11 +102,13 @@ export default class ChangePass extends React.Component {
                         disabled={this.state.loading}
                         style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 15, borderWidth: 1, borderColor: '#000000' }}
                     >
-                        <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>Change password</Text>
+                        <Text style={{ textAlign: 'center', color: '#ffffff', fontWeight: 'bold', fontSize: 16 }}>Change Password</Text>
                     </TouchableOpacity>
 
-                
+
                 </View>
+
+             </View>
 
             </View>
         )
@@ -119,15 +118,12 @@ export default class ChangePass extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        color: 'white',
-        bottom: 80,
     },
     fields: {
         height: 50,
         width: 300,
         top: 31,
+        left: 50,
         margin: 15,
         paddingHorizontal: 40,
         borderBottomRightRadius: 30,
@@ -138,12 +134,18 @@ const styles = StyleSheet.create({
 
     },
     image: {
-    right: 10,
-    left: 3,
-    height: 270,
-    width: 370,
-    top: 120,
-},
+        left: 10,
+        height: 270,
+        width: 370,
+        top: 80,
+    },
+    image1: {
+        height: 900,
+        width: undefined,
+    },
+    page: {
+        bottom: 700,
+    }
 
-}    
+}
 );

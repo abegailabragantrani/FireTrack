@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, Text, StyleSheet, Image, ImageBackground } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
@@ -84,12 +84,9 @@ export default class SignupScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Image style={styles.image}
-                    source={require('./drawnav/1.png')} />
-
-                <Animatable.View
-                    ref={this.validateInput}
-                >
+                <ImageBackground style={styles.image}
+                    source={require('../assets/images/regis.png')} />
+                <View style={styles.page}>
                     <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: -35, left: 20, color: '#FB9246', zIndex:1 }} />
                     <TextInput
                         style={styles.fields}
@@ -121,7 +118,7 @@ export default class SignupScreen extends React.Component {
                     <Icon name="location-pin" size={20} color="#ccc" style={{ position: 'absolute', top: 135, left: 20, color: '#FB9246', zIndex:1 }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="address"
+                        placeholder="Address"
                         onChangeText={(text) => {
                             this.setState({ address: text })
                         }
@@ -131,14 +128,14 @@ export default class SignupScreen extends React.Component {
                     <Icon name="phone" size={20} color="#ccc" style={{ position: 'absolute', top: 190, left: 20, color: '#FB9246', zIndex:1 }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="phone"
+                        placeholder="Phone"
                         onChangeText={(text) => {
                             this.setState({ phone_no: text })
                         }
                         }
                     />
 
-                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 245, left: 20, color: '#FB9246', zIndex:10 }} />
+                    <Icon name="envelope" size={20} color="#ccc" style={{ position: 'absolute', top: 245, left: 20, color: '#FB9246', zIndex:10 }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Email"
@@ -169,9 +166,8 @@ export default class SignupScreen extends React.Component {
                         }
                         }
                     />
-                    
-
-                </Animatable.View>
+                </View>
+                
                 {this.state.error.map((err,key)=>
                 { 
                 if(err){
@@ -181,7 +177,7 @@ export default class SignupScreen extends React.Component {
                         </Text>
                     )  
                 }})}
-                <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 75, bottom: 40 }}>
+                <View style={{ alignItems: 'center', justifyContent: 'center', left: 10, marginBottom: 75, bottom: 640 }}>
                     <TouchableOpacity
                         onPress={() => this.onLogin()}
                         style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 1, borderWidth: 1, borderColor: '#000000' }}
@@ -197,7 +193,7 @@ export default class SignupScreen extends React.Component {
                     <TouchableOpacity
                         onPress={() => this.props.navigation.navigate('Home')}
                     >
-                        <Text style={{ textAlign: 'center', color: '#FB9246', fontSize: 16 }}>Already have an account? Log in..</Text>
+                        <Text style={{ textAlign: 'center', color: '#FB9246', fontSize: 16 }}>Already have an account? Log in.</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -209,9 +205,6 @@ export default class SignupScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
     },
     fields: {
         height: 45,
@@ -226,11 +219,12 @@ const styles = StyleSheet.create({
         bottom: 55,
     },
     image: {
-    right: 10,
-    left: 3,
-    height: 250,
-    width: 370,
-    top: 40,
+        height: 900,
+        width: undefined,
     },
+    page: {
+        bottom: 600,
+        left: 60
+    }
 
 });

@@ -4,13 +4,15 @@ import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-cont
 import { useNavigation } from '@react-navigation/native';
 import BackButton from '../../componets/BackButton';
 import DropDown from '../../componets/DropDown';
-import { GetFireTypes,GetFireStatus } from '../../api/FireTypes';
+import { GetFireTypes,GetFireStatus, GetAlarmLevels } from '../../api/FireTypes';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import apiService from '../../api/config';
+import { AuthContext } from '../../context/Auth';
 
 
 
 const UpdateIncident = ({route}) => {
+    const {state} = React.useContext(AuthContext);
     const { item } = route.params;
     const insets = useSafeAreaInsets();
     const navigation = useNavigation();
@@ -23,9 +25,12 @@ const UpdateIncident = ({route}) => {
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [openAlarmLevel, setOpenAlarmLevel] = useState(false);
+    const [alarmLevel, setAlarmLevel] = useState([]);
+    const [selectedAlarmLevel, setSelectedAlarmLevel] = useState('');
 
     const [responder, setResponder] = React.useState({
-        commander:'',
+        commander: state?.user?.firstname + ' ' + state?.user?.lastname,
         date: new Date(),
         team:'',
         involved:'',
@@ -59,6 +64,11 @@ const UpdateIncident = ({route}) => {
         setStatus({...status, status:item()})
     }
 
+    const handleSelectAlarmLevel = (item) => {
+        setSelectedAlarmLevel(item())
+    
+    }
+
     useEffect(() => {
          const handGetDetails = async () => {
             setLoading(true);
@@ -68,15 +78,24 @@ const UpdateIncident = ({route}) => {
                     setIncident(res.data.incident);
                 }
                 if(res?.data?.responder){
+                    const { commander,  ...rest} = res?.data?.responder;
+
                     const  date = new Date(res.data.responder.date)
-                    setResponder({...res.data.responder, date:date});
+                    if(state?.user){
+                        setResponder({...rest, commander: state?.user?.firstname + ' ' + state?.user?.lastname, date:date});
+                    }else{
+                         setResponder({...rest, date:date});
+                    }
+                   
                 }
                 if(res?.data?.status){
                     setStatus(res.data.status);
                 }
-                if(res?.data?.fireStatus){
-                    setListFireStatus(res.data.fireStatus);
+                if(res?.data?.alarm_level_id){
+                    setSelectedAlarmLevel(res.data.alarm_level_id);
                 }
+
+               
                 setLoading(false)
             } catch (error) {
                 setLoading(false);
@@ -87,8 +106,10 @@ const UpdateIncident = ({route}) => {
         const SelectItems = async () => {
             const fireTypes = await GetFireTypes();
             const fireStatus = await GetFireStatus();
+            const alarmLevel = await GetAlarmLevels();
             setFireTypes(fireTypes);
             setFireStatus(fireStatus)
+            setAlarmLevel(alarmLevel);
             
         }
         SelectItems();
@@ -118,10 +139,11 @@ const UpdateIncident = ({route}) => {
                 incident: JSON.stringify(incident),
                 responder: JSON.stringify(responder),
                 status: JSON.stringify(status),
-                id:item.id
+                id:item.id,
+                alarm_level_id:selectedAlarmLevel
             }
+            console.log('___payload',payload);
             const res = await apiService.post('/update-incident', payload);
-            console.log('RES', res.data);
             if(res?.data?.incident){
                 setIncident(res.data.incident);
             }
@@ -131,17 +153,15 @@ const UpdateIncident = ({route}) => {
             }
             if(res?.data?.status){
                 setStatus(res.data.status);
+                setSelectedAlarmLevel(res.data.alarm_level_id);
             }
-            if(res?.data?.fireStatus){
-                setListFireStatus(res.data.fireStatus);
-            }
+          
             setLoading(false);
         } catch (error) {
-            console.log(error);
+            console.log(error.response.data);
             setLoading(false);
         }
     }
-  
     return (
      <SafeAreaProvider>
      <View style={{ flex: 1, paddingTop: insets.top, paddingLeft:18, overflow:'scroll'}}>
@@ -246,7 +266,8 @@ const UpdateIncident = ({route}) => {
                             <TextInput
                                 style={styles.input}
                                 value={responder.commander}
-                                onChangeText={(e)=>setResponder({...responder, commander:e})}
+                                // onChangeText={(e)=>setResponder({...responder, commander:e})}
+                                editable={false}
                             />
                         
                             <Text style={styles.label}>
@@ -337,6 +358,20 @@ const UpdateIncident = ({route}) => {
                                     value={status.status}
                                     setValue={handleSelectStatus}
                                     items={fireStatus}
+                                    autoScroll={true}
+                                    style={styles.select}
+                                />
+                            }
+                            <Text style={styles.label}>
+                                Alarm Level
+                            </Text>
+                            {alarmLevel?.length > 0 &&
+                                <DropDown
+                                    open={openAlarmLevel}
+                                    setOpen={setOpenAlarmLevel}
+                                    value={selectedAlarmLevel}
+                                    setValue={handleSelectAlarmLevel}
+                                    items={alarmLevel}
                                     autoScroll={true}
                                     style={styles.select}
                                 />

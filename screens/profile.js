@@ -70,7 +70,7 @@ const ProfileScreen = (props) => {
         <View style={styles.top} />
 
           <Image style={styles.image}
-            source={{uri:user?.image? user?.image?.includes('http://')? user?.image + '?' + new Date().getTime(): user?.image : DefaultIMage }} 
+            source={{uri: user?.image && typeof user?.image==='string'? user?.image?.includes('http://')? user?.image + '?' + new Date().getTime(): user?.image : DefaultIMage }} 
             
           />
           <Button

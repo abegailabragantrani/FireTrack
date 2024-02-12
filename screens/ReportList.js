@@ -32,7 +32,7 @@ const ReportList = () => {
             const user_type = state.user?.user_type
             try {
                 const response = await apiService.get(parseInt(state.user.user_type_id)===4?'/my-incidents':'reported-incidents');
-                console.log(response.data);
+                console.log(response.data[0]);
                 setData({
                     data: response.data,
                     loading: false,
@@ -64,6 +64,9 @@ const ReportList = () => {
                             <Text style={{color:item.status === 'pending'?"orange":"green", fontSize:12}}>
                                 {item.status ? `Status: ${item.status}` : `Status: pending`}
                             </Text>
+                            <Text style={{fontSize:12}}>
+                                {item?.informat? `Informant: ${item?.informat}`: `Informant: null`}
+                            </Text>
                         </View>
                     </View>
                         <Text style={styles.fireType}>{item.type}</Text>
@@ -83,7 +86,7 @@ const ReportList = () => {
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'column', justifyContent: 'center', marginTop: 60 }}>
                     <View style={{ marginBottom: 10 }}>
                         <Text style={styles.title}>
-                            Reported Fire Incidents
+                           {parseInt(state.user.user_type_id)===4? 'Reported Fire Incidents ': 'Reported fire incidents'}
                         </Text>
                     </View>
                     <View style={{ flex: 1, justifyContent: 'center' }}>

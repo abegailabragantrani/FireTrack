@@ -36,3 +36,15 @@ export const GetFireStatus = async () => {
         
     }
 }
+
+export const GetAlarmLevels = async () => {
+    try {
+        const res = await apiService.get('/alarm-levels');
+        const levels = res.data.map((item) => {
+            return {label:item.name, value:item.id}
+        })
+        return levels;
+    } catch (error) {
+        
+    }
+}

@@ -61,13 +61,18 @@ const MainScreen = (props)=> {
               <Icon name="home" size={22} color={color} />
             ),
           }} />
-        {state?.user?.user_type !== 'admin' &&
+        { parseInt(state?.user?.user_type_id) === 4 &&
         <><Drawer.Screen name="My Account" component={Account}
             options={{
               drawerIcon: ({ color }) => (
                 <Icon name="user" size={22} color={color} />
               ),
-            }} /></>
+            }} /><Drawer.Screen name="About Us" component={AboutUs}
+              options={{
+                drawerIcon: ({ color }) => (
+                  <Icon name="heart" size={22} color={color} />
+                ),
+              }} /></>
         }
 
         {/* <Button name="Logout" component={Logout} 

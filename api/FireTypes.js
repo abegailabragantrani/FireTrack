@@ -3,20 +3,16 @@ import apiService from "./config"
 export const  GetFireTypes = async () => {
     try {
        const reponse = await apiService.get('/fire-types');
-       let types = [
-            {label:'Structural', value:'Structural',  labelStyle: {fontWeight: 'bold'}},
-            {label:'Non-Structural', value:'Non-Structural', labelStyle: {fontWeight: 'bold'}},
-            {label:'Vehicle', value:'Vehicular', labelStyle: {fontWeight: 'bold'}}
-        ];
+       let types = [];
         reponse.data.map((item) => {
-            if(item.type === 'Structural'){
-                types.push({label:item.name, value:item.id, parent: 'Structural'})
+            if(item.name === 'Structural'){
+                types.push({label:item.name, value:item.id})
             }
-            if(item.type === 'Non-Structural'){
-                types.push({label:item.name, value:item.id, parent: 'Non-Structural'})
+            if(item.name === 'Non-Structural'){
+                types.push({label:item.name, value:item.id})
             }
-            if(item.type === 'Vehicular'){
-                types.push({label:item.name, value:item.id, parent: 'Vehicular'})
+            if(item.name === 'Vehicular'){
+                types.push({label:item.name, value:item.id})
             }
         })
         return types;

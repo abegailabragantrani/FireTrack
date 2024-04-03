@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity, StyleSheet,Image } from 'react-native'
 import apiService from '../../api/config'
 import { removeCreds } from '../../lib/TokenHandler'
 import { AuthContext } from '../../context/Auth'
+import { registerForPushNotificationsAsync } from '../testnotif'
+
 
  const  DashboardScreen = (props) => {
     const {state} = React.useContext(AuthContext)
@@ -19,6 +21,7 @@ import { AuthContext } from '../../context/Auth'
         }
       }
       getUser();
+      registerForPushNotificationsAsync();
     },[])
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>

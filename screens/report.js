@@ -9,8 +9,9 @@ import SelectComponent from '../componets/SelectComponent';
 import * as FileSystem from 'expo-file-system';
 import { AuthContext } from '../context/Auth';
 import { Header } from '@react-navigation/stack';
-import { FireStations } from '../lib/FireStations';
+import { FireStations, getUserDistance } from '../lib/FireStations';
 import { getDistance, isPointWithinRadius } from 'geolib';
+import { sendPushNotification } from './testnotif';
 
 
 const AvatarScreen = () => {
@@ -22,6 +23,7 @@ const AvatarScreen = () => {
     const navigation = useNavigation(); 
     const [type, setType] = useState(null); 
     const [nearbyFireStation, setNearbyFireStation] = useState(null);
+    const [loading,setLoading] = useState(false);
     useEffect(() => {
 
         (async () => {
@@ -37,6 +39,23 @@ const AvatarScreen = () => {
             let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High });
             setLocation(location);
             const stations = await FireStations()
+            const userDistances =  await getUserDistance();
+            if(userDistances.length > 0){
+                console.log('User distances', userDistances);
+                userDistances.map((userDistance) => {
+                    console.log(location.coords.latitude, location.coords.longitude, userDistance?.info.lat, userDistance?.info.long);
+                    const isWithinRadius = isPointWithinRadius(
+                        {latitude: location.coords.latitude, longitude: location.coords.longitude},
+                        {latitude: userDistance?.info.lat, longitude: userDistance.info.long},
+                        2000
+                    )
+                    if(isWithinRadius){
+                         console.log('firstname', userDistance.firstname,  'is within radius');
+                        sendPushNotification(userDistance.device_token)
+                        
+                    }
+                })
+            }
             if(location&&stations){
                     let addressResponse = await Location.reverseGeocodeAsync({
                         latitude: location.coords.latitude,
@@ -77,6 +96,7 @@ const AvatarScreen = () => {
     }
 
     const saveToDatabase = async () => {
+        setLoading(true);
         const photoData = await camera.takePictureAsync({base64: true,});
         const image =  `data:image/jpg;base64,${photoData.base64}`;
         const payload = {
@@ -93,9 +113,28 @@ const AvatarScreen = () => {
                 'Content-Type': 'multipart/form-data'
                 }
             });
+            setLoading(false);
             navigation.navigate('Incident');
+              const userDistances =  await getUserDistance();
+            if(userDistances.length > 0){
+                console.log('User distances', userDistances);
+                userDistances.map((userDistance) => {
+                    console.log(location.coords.latitude, location.coords.longitude, userDistance?.info.lat, userDistance?.info.long);
+                    const isWithinRadius = isPointWithinRadius(
+                        {latitude: location.coords.latitude, longitude: location.coords.longitude},
+                        {latitude: userDistance?.info.lat, longitude: userDistance.info.long},
+                        1000
+                    )
+                    if(isWithinRadius){
+                        // console.log(userDistance.device_token, 'is within radius');
+                        sendPushNotification(userDistance.device_token)
+                        
+                    }
+                })
+            }
         } catch (error) {
-            console.log(error.response.data);
+            setLoading(false);
+            console.log('error reporting',error.response.data);
             if(error.response.data.msg){
                 Alert.alert(error.response.data.msg);
             }
@@ -161,7 +200,8 @@ const AvatarScreen = () => {
                                 {/* <SelectComponent
                                     handleSelect={handleSelect}
                                 /> */}
-
+                                {loading ? <Text style={{color:'black'}}>Reporting incident...</Text> 
+                                : 
                                   <TouchableOpacity
                                     style={{
                                         backgroundColor: address && camera ? 'orange' : 'gray',
@@ -176,6 +216,7 @@ const AvatarScreen = () => {
                                 >
                                     <Text style={{ color: 'white', fontSize: 16 }}>Report incident</Text>
                                 </TouchableOpacity>
+                                }
                             </View>
                             <View style={{width:'46%',  paddingTop:20}}>
                                 {nearbyFireStation&&

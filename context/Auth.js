@@ -3,6 +3,8 @@ import apiService from '../api/config';
 import { setStorage } from '../lib/TokenHandler';
 import { getToken } from '../lib/TokenHandler';
 import { removeCreds } from '../lib/TokenHandler';
+import * as Notifications from 'expo-notifications';
+
 
 export const AuthContext = React.createContext();
 
@@ -92,6 +94,25 @@ const AuthProvider = (props) => {
     }),
     []
   );
+    const notificationListener = React.useRef();
+    const responseListener = React.useRef();
+    React.useEffect(() => {
+      // registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+
+      notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+        console.log(notification);
+      });
+
+      responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+        console.log(response);
+      });
+
+      return () => {
+        Notifications.removeNotificationSubscription(notificationListener.current);
+        Notifications.removeNotificationSubscription(responseListener.current);
+      };
+    }, []);
+
   return (
     <AuthContext.Provider value={{...authContext, state}}>
         {props.children}

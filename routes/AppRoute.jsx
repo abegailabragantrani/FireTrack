@@ -15,6 +15,7 @@ import TestScreen from '../screens/test';
 import ReportList from '../screens/ReportList';
 import ViewReportedIncident from '../screens/ViewReportedIncident';
 import UpdateIncident from '../screens/Admin/UpdateIncident';
+import TestNotif from '../screens/testnotif';
 
 const Stack = createStackNavigator();
 
@@ -35,7 +36,6 @@ const AppRoute = () => {
                 <Stack.Screen name="Incident" component={ReportList} />
                 <Stack.Screen name='UpdateIncident' component={UpdateIncident}/>
                 <Stack.Screen name="Report" component={ReportScreen} />
-
                 {/* <Stack.Screen name='UpdateIncident' component={}/> */}
               </>
               :

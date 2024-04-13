@@ -31,7 +31,7 @@ const ReportList = () => {
             setData({...data, loading: true });
             const user_type = state.user?.user_type
             try {
-                const response = await apiService.get(parseInt(state.user.user_type_id)===4?'/my-incidents':'reported-incidents');
+                const response = await apiService.get(parseInt(state.user.user_type_id)===4?'/my-incidents':'reported-incidents?year=2024');
                 console.log(response.data[0]);
                 setData({
                     data: response.data,

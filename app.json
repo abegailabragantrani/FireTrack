@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "FireTrack",
-    "slug": "FireTrack",
+    "slug": "fire-fire",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f7b2042f-5c4a-438e-841d-444cc9416102"
+      }
+    },
+    "owner": "walkwliberty"
   }
 }

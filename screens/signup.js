@@ -1,10 +1,10 @@
 import * as React from 'react'
-import { View, Text, StyleSheet, Image, ImageBackground } from 'react-native'
+import { View, Text, StyleSheet, Image, ActivityIndicator } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import apiService from '../api/config';
-import { ActivityIndicator } from "react-native";
+import axios from 'axios';
 
 
 
@@ -13,6 +13,7 @@ export default class SignupScreen extends React.Component {
     constructor(props) {
         super(props)
         this.validateInput = React.createRef()
+        this.timeoutId = null;
     }
 
     state = {
@@ -26,9 +27,14 @@ export default class SignupScreen extends React.Component {
         password:'',
         password_confirmation:'',
         loading:false,
-        error:['']
+        error:[],
+        lat:null,
+        long:null,
+        errorAddress: false,
+        loadingAddress: false
 
     }
+    
 
     onLogin = async() => {
         // if (this.state.username == 'abe' && this.state.password == 'pretty') {
@@ -43,7 +49,9 @@ export default class SignupScreen extends React.Component {
              const info = {
                 gender:this.state.gender,
                 address:this.state.address,
-                phone_no:this.state.phone_no
+                phone_no:this.state.phone_no,
+                lat:this.state.lat,
+                long:this.state.long
             }
         const payload = {
            firstname:this.state.firstname,
@@ -79,9 +87,44 @@ export default class SignupScreen extends React.Component {
        
     }
 
+    handleAddressChange = (text) => {
+        if (this.timeoutId !== null) {
+        clearTimeout(this.timeoutId);
+        }
+        this.setState({ loadingAddress: true });
+        this.timeoutId = setTimeout(() => {
+        if (text !== this.state.address) {
+            console.log('requesting location');
+            this.setState({ address: text });
+            this.handleGetLocation();
+        }
+        }, 3000);
+    }
+
+    handleGetLocation = async () => {
+        try {
+            const YOUR_API_KEY = 'YOUR_API_KEY'
+            const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.address}&key={YOUR_API_KEY}`;
+            const response = await axios.get(geocodeUrl)
+            console.log(response.data.results[0].geometry.location.lat, response.data.results[0].geometry.location.lng);
+            this.setState({ 
+                lat: response.data.results[0].geometry.location.lat, 
+                long: response.data.results[0].geometry.location.lng,
+                loadingAddress: false,
+                errorAddress: false
+            });
+        } catch (error) {
+            this.setState({ 
+                loadingAddress: false,
+                errorAddress: true
+            });
+        }
+    }
+
    
 
     render() {
+        // console.log(this.state.error.length, this.state.errorAddress, this.state.lat, this.state.long);
         return (
             <View style={styles.container}>
                 <ImageBackground style={styles.image}
@@ -117,13 +160,20 @@ export default class SignupScreen extends React.Component {
 
                     <Icon name="location-pin" size={20} color="#ccc" style={{ position: 'absolute', top: 135, left: 20, color: '#FB9246', zIndex:1 }} />
                     <TextInput
-                        style={styles.fields}
-                        placeholder="Address"
-                        onChangeText={(text) => {
-                            this.setState({ address: text })
-                        }
-                        }
+                        style={this.state.errorAddress? styles.fieldsError : styles.fields}
+                        placeholder="address"
+                        onChangeText={this.handleAddressChange}
                     />
+                    {
+                        this.state.errorAddress &&
+                        <Text style={{ color: 'red', textAlign: 'center', top: -60, fontSize: 12 }}>
+                            Unable to get location. Please check your address and try again.
+                        </Text>
+                    }
+                    {
+                        this.state.loadingAddress &&
+                        <ActivityIndicator size="small" style={{ color: 'gray', textAlign: 'center', top: -60 }}/>
+                    }
 
                     <Icon name="phone" size={20} color="#ccc" style={{ position: 'absolute', top: 190, left: 20, color: '#FB9246', zIndex:1 }} />
                     <TextInput
@@ -181,7 +231,7 @@ export default class SignupScreen extends React.Component {
                     <TouchableOpacity
                         onPress={() => this.onLogin()}
                         style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 1, borderWidth: 1, borderColor: '#000000' }}
-                        disabled={this.state.loading}
+                        disabled={this.state.loading || this.state.errorAddress || this.state.lat === null || this.state.long === null }
                     >
                         { this.state.loading?
                         <ActivityIndicator color={"#fff"}  />
@@ -217,6 +267,21 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 30,
         backgroundColor: '#d3d3d3d3',
         bottom: 55,
+    },
+    fieldsError: {
+        height: 45,
+        width: 300,
+        margin: 6,
+        paddingHorizontal: 40,
+        borderBottomRightRadius: 30,
+        borderBottomLeftRadius: 30,
+        borderTopRightRadius: 30,
+        borderTopLeftRadius: 30,
+        backgroundColor: '#d3d3d3d3',
+        bottom: 55,
+        borderColor: 'red',
+        borderWidth: 1,
+        borderStyle: 'solid'
     },
     image: {
         height: 900,

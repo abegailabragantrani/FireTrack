@@ -67,12 +67,14 @@ const MainScreen = (props)=> {
               drawerIcon: ({ color }) => (
                 <Icon name="user" size={22} color={color} />
               ),
-            }} /><Drawer.Screen name="About Us" component={AboutUs}
+            }} />
+            {/* <Drawer.Screen name="About Us" component={AboutUs}
               options={{
                 drawerIcon: ({ color }) => (
                   <Icon name="heart" size={22} color={color} />
                 ),
-              }} /></>
+              }} /> */}
+              </>
         }
 
         {/* <Button name="Logout" component={Logout} 

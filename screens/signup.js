@@ -5,6 +5,10 @@ import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import apiService from '../api/config';
 import axios from 'axios';
+import * as Location from 'expo-location';
+import DropDownPicker from 'react-native-dropdown-picker';
+import DropDown from '../componets/DropDown';
+
 
 
 
@@ -14,27 +18,64 @@ export default class SignupScreen extends React.Component {
         super(props)
         this.validateInput = React.createRef()
         this.timeoutId = null;
+       
+        this.state = {
+
+            firstname:'',
+            lastname:'',
+            gender:'',
+            address:'',
+            phone_no:'',
+            email:'',
+            password:'',
+            password_confirmation:'',
+            loading:false,
+            error:[],
+            lat:null,
+            long:null,
+            errorAddress: false,
+            loadingAddress: false,
+            location: null,
+            open: false,
+            value: null,
+            items: [{label:'Select Gender',value:0,}, {label:'Male', value:'male'}, {label:'Female', value:'female'}]
+
+        }
+
+        this.setValue = this.setValue.bind(this);
+
+    }
+   
+
+  
+
+    async componentDidMount() {
+        if (Platform.OS === 'android' && !Constants.isDevice) {
+            this.setState({
+                errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
+            });
+            return;
+        }
+        let { status: locationStatus } = await Location.requestForegroundPermissionsAsync();
+            if (locationStatus !== 'granted') {
+                console.log('Permission to access location was denied');
+                return;
+            }
+
+        let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High });
+        const {latitude, longitude} = location.coords;  
+
+        let addressResponse = await Location.reverseGeocodeAsync({
+                        latitude: location.coords.latitude,
+                        longitude: location.coords.longitude,
+        });
+        const address = addressResponse[0];
+
+        // console.log('addressResponse', addressResponse[0]);
+        // console.log('lat', latitude, 'long', longitude);
+        this.setState({ lat: latitude, long: longitude, address: `${address?.street}, ${address?.city}, ${address?.region}, ${address?.country}` });
     }
 
-    state = {
-
-        firstname:'',
-        lastname:'',
-        gender:'',
-        address:'',
-        phone_no:'',
-        email:'',
-        password:'',
-        password_confirmation:'',
-        loading:false,
-        error:[],
-        lat:null,
-        long:null,
-        errorAddress: false,
-        loadingAddress: false
-
-    }
-    
 
     onLogin = async() => {
         // if (this.state.username == 'abe' && this.state.password == 'pretty') {
@@ -46,6 +87,20 @@ export default class SignupScreen extends React.Component {
 
         try {
             this.setState({ loading: true })
+            if(
+                !this.state.firstname || 
+                !this.state.address || 
+                !this.state.phone_no || 
+                !this.state.email || 
+                !this.state.password || 
+                !this.state.password_confirmation ||
+                !this.state.gender ||
+                this.state.gender == 0
+            ){
+                console.log(this.state.firstname, this.state.address, this.state.phone_no, this.state.email, this.state.password, this.state.password_confirmation, this.state.gender);
+                this.setState({ loading: false, error: ['All fields are required'] })
+                return
+            }
              const info = {
                 gender:this.state.gender,
                 address:this.state.address,
@@ -71,6 +126,7 @@ export default class SignupScreen extends React.Component {
         } catch (error) {
             this.setState({ loading: false })
           console.log(error.response.data.errors);
+          console.log(error.response);
             if(error.response.data.errors){
                 this.setState({ error: Object.values(error.response.data.errors) })
             }
@@ -121,15 +177,35 @@ export default class SignupScreen extends React.Component {
         }
     }
 
-   
+    setOpen(open) {
+        this.setState({
+        open
+        });
+    }
+
+    setValue(callback) {
+        this.setState(state => ({
+        gender: callback(state.value)
+        }));
+    }
+
+    setItems(callback) {
+        this.setState(state => ({
+        items: callback(state.items)
+        }));
+    }
 
     render() {
         // console.log(this.state.error.length, this.state.errorAddress, this.state.lat, this.state.long);
+            const { open, value, items, gender } = this.state;
         return (
             <View style={styles.container}>
-                <ImageBackground style={styles.image}
-                    source={require('../assets/images/regis.png')} />
-                <View style={styles.page}>
+                <Image style={styles.image}
+                    source={require('./drawnav/1.png')} />
+
+                <Animatable.View
+                    ref={this.validateInput}
+                >
                     <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: -35, left: 20, color: '#FB9246', zIndex:1 }} />
                     <TextInput
                         style={styles.fields}
@@ -149,20 +225,27 @@ export default class SignupScreen extends React.Component {
                         }
                     />
                     <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 75, left: 20, color: '#FB9246', zIndex:1 }} />
-                    <TextInput
-                        style={styles.fields}
-                        placeholder="Gender"
-                        onChangeText={(text) => {
-                            this.setState({ gender: text })
-                        }
-                        }
-                    />
+                 
+                    <View style={{...styles.fields, zIndex:100}}>
+                       <DropDown
+                            open={open}
+                            value={gender}
+                            setOpen={this.setOpen.bind(this)}
+                            setValue={this.setValue.bind(this)}
+                            setItems={this.setItems.bind(this)}
+                            items={items}
+                            style={styles.select}
+                            autoScroll={true}
+                       />
+                    </View>
+                    
 
                     <Icon name="location-pin" size={20} color="#ccc" style={{ position: 'absolute', top: 135, left: 20, color: '#FB9246', zIndex:1 }} />
                     <TextInput
                         style={this.state.errorAddress? styles.fieldsError : styles.fields}
                         placeholder="address"
                         onChangeText={this.handleAddressChange}
+                        value={this.state.address}
                     />
                     {
                         this.state.errorAddress &&
@@ -178,14 +261,14 @@ export default class SignupScreen extends React.Component {
                     <Icon name="phone" size={20} color="#ccc" style={{ position: 'absolute', top: 190, left: 20, color: '#FB9246', zIndex:1 }} />
                     <TextInput
                         style={styles.fields}
-                        placeholder="Phone"
+                        placeholder="phone"
                         onChangeText={(text) => {
                             this.setState({ phone_no: text })
                         }
                         }
                     />
 
-                    <Icon name="envelope" size={20} color="#ccc" style={{ position: 'absolute', top: 245, left: 20, color: '#FB9246', zIndex:10 }} />
+                    <Icon name="user" size={20} color="#ccc" style={{ position: 'absolute', top: 245, left: 20, color: '#FB9246', zIndex:10 }} />
                     <TextInput
                         style={styles.fields}
                         placeholder="Email"
@@ -216,8 +299,9 @@ export default class SignupScreen extends React.Component {
                         }
                         }
                     />
-                </View>
-                
+                    
+
+                </Animatable.View>
                 {this.state.error.map((err,key)=>
                 { 
                 if(err){
@@ -227,7 +311,7 @@ export default class SignupScreen extends React.Component {
                         </Text>
                     )  
                 }})}
-                <View style={{ alignItems: 'center', justifyContent: 'center', left: 10, marginBottom: 75, bottom: 640 }}>
+                <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 75, bottom: 40 }}>
                     <TouchableOpacity
                         onPress={() => this.onLogin()}
                         style={{ width: 200, height: 50, backgroundColor: '#FB9246', alignItems: 'center', justifyContent: 'center', borderRadius: 15, marginBottom: 1, borderWidth: 1, borderColor: '#000000' }}
@@ -243,7 +327,7 @@ export default class SignupScreen extends React.Component {
                     <TouchableOpacity
                         onPress={() => this.props.navigation.navigate('Home')}
                     >
-                        <Text style={{ textAlign: 'center', color: '#FB9246', fontSize: 16 }}>Already have an account? Log in.</Text>
+                        <Text style={{ textAlign: 'center', color: '#FB9246', fontSize: 16 }}>Already have an account? Log in..</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -255,6 +339,9 @@ export default class SignupScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'white',
     },
     fields: {
         height: 45,
@@ -284,12 +371,23 @@ const styles = StyleSheet.create({
         borderStyle: 'solid'
     },
     image: {
-        height: 900,
-        width: undefined,
+        right: 10,
+        left: 3,
+        height: 250,
+        width: 370,
+        top: 40,
     },
-    page: {
-        bottom: 600,
-        left: 60
+    select: {
+        width: 300,
+        // minHeight: 40,
+        // borderRadius: 5,
+        // backgroundColor: 'rgba(255,255,255)',
+        // marginBottom: 10,
+        // zIndex:1000,
+        justifyContent:'center',
+        alignItems:'center',
+        alignContent:'center',
+        alignSelf:'center',
     }
 
 });

@@ -6,9 +6,9 @@ import { Platform } from 'react-native';
 // In my case my local IP address is 192.168.1.31
 
 const baseURL = Platform.OS === 'android' ?
- 'http://192.168.126.67:8000/api' 
+ 'http://192.168.221.78:8000/api' 
  : 
- 'http://192.168.126.67:8000/api'
+ 'http://192.168.221.78:8000/api'
 
 const apiService =  Axios.create({
   baseURL: baseURL,
